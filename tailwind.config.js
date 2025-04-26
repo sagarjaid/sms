@@ -1,6 +1,7 @@
 /** @format */
 
 module.exports = {
+  darkMode: ['class'],
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -10,31 +11,14 @@ module.exports = {
   theme: {
     screens: {
       s: '0px',
-      // => @media (min-width: 375px) { ... }
-
       xs: '375px',
-      // => @media (min-width: 375px) { ... }
-
       sd: '480px',
-      // => @media (min-width: 480px) { ... }
-
       sdm: '575px',
-      // => @media (min-width: 575px) { ... }
-
       sm: '640px',
-      // => @media (min-width: 640px) { ... }
-
       md: '768px',
-      // => @media (min-width: 768px) { ... }
-
       lg: '1024px',
-      // => @media (min-width: 1024px) { ... }
-
       xl: '1280px',
-      // => @media (min-width: 1280px) { ... }
-
       xxl: '1536px',
-      // => @media (min-width: 1280px) { ... }
     },
     extend: {
       backgroundImage: {
@@ -54,30 +38,35 @@ module.exports = {
           '100%': { opacity: 1 },
         },
         appearFromRight: {
-          '0%': { opacity: 0.3, transform: 'translate(15%, 0px);' },
-          '100%': { opacity: 1, transform: 'translate(0);' },
+          '0%': {
+            opacity: 0.3,
+            transform: 'translate(15%, 0px);',
+          },
+          '100%': {
+            opacity: 1,
+            transform: 'translate(0);',
+          },
         },
         wiggle: {
-          '0%, 20%, 80%, 100%': {
-            transform: 'rotate(0deg)',
-          },
-          '30%, 60%': {
-            transform: 'rotate(-2deg)',
-          },
-          '40%, 70%': {
-            transform: 'rotate(2deg)',
-          },
-          '45%': {
-            transform: 'rotate(-4deg)',
-          },
-          '55%': {
-            transform: 'rotate(4deg)',
-          },
+          '0%, 20%, 80%, 100%': { transform: 'rotate(0deg)' },
+          '30%, 60%': { transform: 'rotate(-2deg)' },
+          '40%, 70%': { transform: 'rotate(2deg)' },
+          '45%': { transform: 'rotate(-4deg)' },
+          '55%': { transform: 'rotate(4deg)' },
         },
         popup: {
-          '0%': { transform: 'scale(0.8)', opacity: 0.8 },
-          '50%': { transform: 'scale(1.1)', opacity: 1 },
-          '100%': { transform: 'scale(1)', opacity: 1 },
+          '0%': {
+            transform: 'scale(0.8)',
+            opacity: 0.8,
+          },
+          '50%': {
+            transform: 'scale(1.1)',
+            opacity: 1,
+          },
+          '100%': {
+            transform: 'scale(1)',
+            opacity: 1,
+          },
         },
         shimmer: {
           '0%': { backgroundPosition: '0 50%' },
@@ -119,6 +108,13 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        chart: {
+          1: 'hsl(var(--chart-1))',
+          2: 'hsl(var(--chart-2))',
+          3: 'hsl(var(--chart-3))',
+          4: 'hsl(var(--chart-4))',
+          5: 'hsl(var(--chart-5))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -127,5 +123,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-animate')],
 };

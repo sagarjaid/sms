@@ -9,7 +9,7 @@ import { useSearchParams } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import config from '@/config';
 import logo from '@/app/icon.png';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button-2';
 
 const Header = () => {
   const searchParams = useSearchParams();
