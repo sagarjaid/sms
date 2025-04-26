@@ -1,26 +1,4 @@
-export type Theme =
-  | "light"
-  | "dark"
-  | "cupcake"
-  | "bumblebee"
-  | "emerald"
-  | "corporate"
-  | "synthwave"
-  | "retro"
-  | "cyberpunk"
-  | "valentine"
-  | "halloween"
-  | "garden"
-  | "forest"
-  | "aqua"
-  | "lofi"
-  | "pastel"
-  | "fantasy"
-  | "wireframe"
-  | "black"
-  | "luxury"
-  | "dracula"
-  | "";
+/** @format */
 
 export interface ConfigProps {
   appName: string;
@@ -54,7 +32,6 @@ export interface ConfigProps {
     supportEmail?: string;
   };
   colors: {
-    theme: Theme;
     main: string;
   };
   auth: {
