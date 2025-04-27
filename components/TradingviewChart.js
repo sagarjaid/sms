@@ -229,7 +229,7 @@ const ChartComponent = ({
 
       <div
         ref={chartContainerRef}
-        style={{ width: '100%', height: '550px' }}
+        style={{ width: '96%', height: '550px' }}
       />
       <div className='flex mt-2 items-center justify-center'>
         <div

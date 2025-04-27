@@ -5,42 +5,48 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import config from '@/config';
-import logo from '@/app/icon.png';
+import logo from '@/app/logo.png';
+import logo2 from '@/app/logo-2.png';
 import { Button } from '@/components/ui/button-2';
 import { AssetSearch } from './asset-search';
 
-const Header = () => {
+const HeaderHomepage = () => {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { theme, setTheme } = useTheme();
+
+  const isAssetPage = ['/stock', '/crypto'].includes(pathname);
 
   useEffect(() => {
     setIsOpen(false);
   }, [searchParams]);
 
+  const getLogo = () => {
+    return theme === 'dark' ? logo2 : logo;
+  };
+
   return (
     <header className='border-b border-border sticky top-0 w-full z-10 bg-background'>
       <nav
-        className='w-full flex items-center justify-between p-4'
+        className='w-full flex items-center justify-between p-4 lg:p-4'
         aria-label='Global'>
-        <div className='flex lg:hidden'>
+        <div className={`flex ${isAssetPage ? 'lg:hidden' : 'lg:block'}`}>
           <Link
-            className='flex items-center gap-2 shrink-0'
+            className='flex items-center mt-1 gap-2 shrink-0'
             href='/'
             title={`${config.appName} homepage`}>
             <Image
-              src={logo}
+              src={getLogo()}
               alt={`${config.appName} logo`}
-              className='w-8'
-              placeholder='blur'
+              className={`transition-all duration-300 w-[130px]`}
               priority={true}
-              width={32}
-              height={32}
+              width={100}
+              height={50}
             />
-            <span className='font-extrabold text-lg'>{config.appName}</span>
           </Link>
         </div>
         <div className='flex lg:hidden'>
@@ -65,7 +71,10 @@ const Header = () => {
           </Button>
         </div>
 
-        <div className='hidden lg:flex lg:flex-1'>
+        <div
+          className={`hidden ${
+            isAssetPage ? 'lg:flex lg:flex-1' : 'lg:hidden'
+          }`}>
           <AssetSearch />
         </div>
 
@@ -156,22 +165,20 @@ const Header = () => {
       {/* Mobile menu */}
       <div className={`lg:hidden ${isOpen ? 'fixed inset-0 z-50' : 'hidden'}`}>
         <div className='fixed inset-0 bg-background/80 backdrop-blur-sm' />
-        <div className='fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-background p-4 sm:max-w-sm sm:ring-1 sm:ring-border'>
+        <div className='fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-background px-4 sm:max-w-sm sm:ring-1 sm:ring-border'>
           <div className='flex items-center justify-between'>
             <Link
-              className='flex items-center gap-2 shrink-0'
-              title={`${config.appName} homepage`}
-              href='/'>
+              className='flex items-center py-4 mt-1 gap-2 shrink-0'
+              href='/'
+              title={`${config.appName} homepage`}>
               <Image
-                src={logo}
+                src={getLogo()}
                 alt={`${config.appName} logo`}
-                className='w-8'
-                placeholder='blur'
+                className={`transition-all duration-300 w-[130px]`}
                 priority={true}
-                width={32}
-                height={32}
+                width={100}
+                height={50}
               />
-              <span className='font-extrabold text-lg'>{config.appName}</span>
             </Link>
             <Button
               variant='ghost'
@@ -270,4 +277,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderHomepage;

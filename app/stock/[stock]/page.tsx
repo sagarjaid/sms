@@ -19,6 +19,8 @@ import { usePathname } from 'next/navigation';
 // import ThemeToggle from '@/components/ThemeToggle';
 import Link from 'next/link';
 import { AssetSearch } from '@/components/asset-search';
+import Navbar from '@/components/Navbar';
+import StockList from '@/components/StockList';
 
 interface StockPageProps {
   params: {
@@ -71,28 +73,14 @@ export default function StockPage({ params }: StockPageProps) {
 
   return (
     <>
-      {/* <Suspense>
-        <Header />
-      </Suspense> */}
-      <Header />
       <main>
-        <div className='flex w-full h-screen overflow-hidden text-xs '>
+        <div className='flex w-full text-xs '>
+          <Navbar />
           <div className='flex justify-between w-full'>
-            <div className='flex flex-col w-full overflow-y-scroll'>
-              <div className='flex items-center justify-between  p-2.5  border-b border-gray-200'>
-                <AssetSearch />
-              </div>
-              <div className='flex '>
-                <div className='w-52 max-h-[calc(100vh-80px)]  border-r overflow-hidden hover:overflow-y-scroll'>
-                  {stocksList.map((stock) => (
-                    <Link
-                      href={`${stock.symbol.toLowerCase()}-vs-btc`}
-                      className='p-2.5 block'
-                      key={stock.symbol}>
-                      {stock.name}
-                    </Link>
-                  ))}
-                </div>
+            <div className='flex flex-col w-full h-screen  overflow-y-scroll'>
+              <Header />
+              <div className='flex w-full'>
+                <StockList stocksList={stocksList} />
                 <div className='w-full p-4'>
                   <TradingViewSection
                     stocksList={stocksList}

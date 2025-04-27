@@ -1,14 +1,19 @@
 /** @format */
 
 import { Suspense } from 'react';
-import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Headline from '@/components/Headline';
+import Copy from '@/components/Copy';
+import HeaderHomepage from '@/components/HeaderHomepage';
 
 export default function Home() {
   return (
     <>
-      <Header />
-      <h1 className='text-4xl font-bold'>Hello</h1>
+      <HeaderHomepage />
+      <main>
+        <Headline />
+        <Copy />
+      </main>
       <Footer />
     </>
   );

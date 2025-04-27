@@ -1,23 +1,30 @@
-# ShipFast — Typescript
+<!-- @format -->
 
-Hey maker 👋 it's Marc from [ShipFast](https://shipfa.st/docs). Let's get your startup off the ground, FAST ⚡️
+# basedinbitcoin — Typescript
+
+Hey maker 👋 it's Marc from [basedinbitcoin](https://shipfa.st/docs). Let's get
+your startup off the ground, FAST ⚡️
 
 <sub>**Watch/Star the repo to be notified when updates are pushed**</sub>
 
 ## Get Started
 
-1. Follow the [Get Started Tutorial](https://shipfa.st/docs) to clone the repo and run your local server 💻
+1. Follow the [Get Started Tutorial](https://shipfa.st/docs) to clone the repo
+   and run your local server 💻
 
-<sub>**Looking for the /pages router version?** Use this [documentation](https://shipfa.st/docs-old) instead</sub>
+<sub>**Looking for the /pages router version?** Use this
+[documentation](https://shipfa.st/docs-old) instead</sub>
 
-2. Follow the [Ship In 5 Minutes Tutorial](https://shipfa.st/docs/tutorials/ship-in-5-minutes) to learn the foundation and ship your app quickly ⚡️
+2. Follow the
+   [Ship In 5 Minutes Tutorial](https://shipfa.st/docs/tutorials/ship-in-5-minutes)
+   to learn the foundation and ship your app quickly ⚡️
 
 ## Links
 
--   [📚 Documentation](https://shipfa.st/docs)
--   [📣 Updates](https://shipfast.beehiiv.com/)
--   [🧑‍💻 Discord](https://shipfa.st/dashboard)
--   [🥇 Leaderboard](https://shipfa.st/leaderboard)
+- [📚 Documentation](https://shipfa.st/docs)
+- [📣 Updates](https://basedinbitcoin.beehiiv.com/)
+- [🧑‍💻 Discord](https://shipfa.st/dashboard)
+- [🥇 Leaderboard](https://shipfa.st/leaderboard)
 
 ## Support
 
@@ -27,12 +34,13 @@ Let's ship it, FAST ⚡️
 
 \_
 
-**📈 Grow your startup with [DataFast](https://datafa.st?ref=shipfast_readme)**
+**📈 Grow your startup with
+[DataFast](https://datafa.st?ref=basedinbitcoin_readme)**
 
--   Analyze your traffic
--   Get insights on your customers
--   Make data-driven decisions
+- Analyze your traffic
+- Get insights on your customers
+- Make data-driven decisions
 
-ShipFast members get 30% OFF on all plans! 🎁
+basedinbitcoin members get 30% OFF on all plans! 🎁
 
 ![datafast](https://github.com/user-attachments/assets/2a9710f8-9a39-4593-b4bf-9ee933529870)

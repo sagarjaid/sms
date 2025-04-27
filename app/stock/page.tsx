@@ -11,6 +11,7 @@ import Header from '@/components/Header';
 import { useState, useMemo } from 'react';
 import TradingViewSection from '@/containers/tradingview-section';
 import StocksTable from '@/containers/stocks-table';
+import Navbar from '@/components/Navbar';
 
 import Image from 'next/image';
 import hero from '@/app/hero.png';
@@ -55,16 +56,13 @@ export default function Home() {
 
   return (
     <>
-      {/* <Suspense>
-        <Header />
-      </Suspense> */}
-      <Header />
-      <main>
-        <div className='flex w-full h-screen text-xs'>
+      <main className='h-screen'>
+        <div className='flex w-full text-xs '>
+          <Navbar />
           <div className='flex justify-between w-full'>
-            <div className='flex flex-col w-full overflow-y-scroll'>
-              <AssetSearch />
-              <div className='p-4'>
+            <div className='flex flex-col w-full '>
+              <Header />
+              <div className='flex flex-col w-full  p-4'>
                 <h2 className='text-2xl font-bold mb-4'>Stock Performance</h2>
                 <StocksTable
                   stocksList={stocksList}

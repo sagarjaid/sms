@@ -159,7 +159,7 @@ export function AssetSearch() {
   // Handle asset click - open in new tab
   const handleAssetClick = (symbol: string) => {
     // In a real app, you would construct the appropriate URL for the asset
-    window.open(`https://finance.example.com/symbol/${symbol}`, '_blank');
+    window.open(`/stock/${symbol.toLowerCase()}-vs-btc`, '_blank');
     setIsOpen(false);
   };
 
