@@ -7,7 +7,17 @@ import Link from 'next/link';
 import axios from 'axios';
 import moment from 'moment';
 
-const BondsTable = ({ bondsList = [], path }) => {
+interface Bond {
+  symbol: string;
+  name: string;
+}
+
+interface BondsTableProps {
+  bondsList?: Bond[];
+  path: string;
+}
+
+const BondsTable = ({ bondsList = [], path }: BondsTableProps) => {
   const [bondData, setBondData] = useState([]);
 
   // Date ranges
@@ -66,7 +76,10 @@ const BondsTable = ({ bondsList = [], path }) => {
     fetchData();
   }, [bondsList]);
 
-  const calculateChange = (current, previous) => {
+  const calculateChange = (
+    current: number | undefined,
+    previous: number | undefined
+  ): number => {
     if (!current || !previous || previous === 0) return NaN;
     return ((current - previous) / previous) * 100;
   };

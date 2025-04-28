@@ -61,7 +61,7 @@ export default function CurrencyTable({
 
   // Fetch all currency data
   useEffect(() => {
-    const getAllStockData = async (daysAgo = 0) => {
+    const getAllStockData = async (daysAgo = 0): Promise<void> => {
       setIsLoading(true);
       setError(null);
       const formattedDate = moment()
@@ -118,7 +118,7 @@ export default function CurrencyTable({
 
   // Fetch comparison data for different time periods
   useEffect(() => {
-    const getSpecialDateData = async (daysAgo = 0) => {
+    const getSpecialDateData = async (daysAgo = 0): Promise<void> => {
       const formattedDate = moment()
         .subtract(daysAgo, 'days')
         .format('YYYY-MM-DD');

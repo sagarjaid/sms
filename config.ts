@@ -2,14 +2,14 @@
 
 import { ConfigProps } from './types/config';
 
-const config = {
+const config: ConfigProps = {
   // REQUIRED
   appName: 'basedinbitcoin',
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
     'The NextJS boilerplate with all you need to build your SaaS, AI tool, or any other web app.',
   // REQUIRED (no https://, not trailing slash at the end, just the naked domain)
-  domainName: 'shipfa.st',
+  domainName: 'basedinbitcoin.com',
   crisp: {
     // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (resend.supportEmail) otherwise customer support won't work.
     id: '',
@@ -74,9 +74,9 @@ const config = {
   },
   resend: {
     // REQUIRED — Email 'From' field to be used when sending magic login links
-    fromNoReply: `basedinbitcoin <noreply@resend.shipfa.st>`,
+    fromNoReply: `basedinbitcoin <noreply@resend.basedinbitcoin.com>`,
     // REQUIRED — Email 'From' field to be used when sending other emails, like abandoned carts, updates etc..
-    fromAdmin: `Marc at basedinbitcoin <marc@resend.shipfa.st>`,
+    fromAdmin: `Marc at basedinbitcoin <marc@resend.basedinbitcoin.com>`,
     // Email shown to customer if need support. Leave empty if not needed => if empty, set up Crisp above, otherwise you won't be able to offer customer support."
     supportEmail: 'marc.louvion@gmail.com',
   },
@@ -90,6 +90,6 @@ const config = {
     // REQUIRED — the path you want to redirect users after successfull login (i.e. /dashboard, /private). This is normally a private page for users to manage their accounts. It's used in apiClient (/libs/api.js) upon 401 errors from our API & in ButtonSignin.js
     callbackUrl: '/dashboard',
   },
-} as ConfigProps;
+};
 
 export default config;

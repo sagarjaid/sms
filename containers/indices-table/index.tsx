@@ -64,7 +64,7 @@ const IndicesTable = ({ indicesList = [], path }: IndicesTableProps) => {
 
       // Get current period currency data for table calculations
       setCurrencyData(
-        yearData.filter((item) => {
+        yearData.filter((item: { t: number }) => {
           const itemDate = dateUtils.timestampToISODate(item.t);
           return itemDate >= startDate && itemDate <= endDate;
         })

@@ -2,33 +2,33 @@
 
 # basedinbitcoin — Typescript
 
-Hey maker 👋 it's Marc from [basedinbitcoin](https://shipfa.st/docs). Let's get
-your startup off the ground, FAST ⚡️
+Hey maker 👋 it's Marc from [basedinbitcoin](https://basedinbitcoin.com/docs).
+Let's get your startup off the ground, FAST ⚡️
 
 <sub>**Watch/Star the repo to be notified when updates are pushed**</sub>
 
 ## Get Started
 
-1. Follow the [Get Started Tutorial](https://shipfa.st/docs) to clone the repo
-   and run your local server 💻
+1. Follow the [Get Started Tutorial](https://basedinbitcoin.com/docs) to clone
+   the repo and run your local server 💻
 
 <sub>**Looking for the /pages router version?** Use this
-[documentation](https://shipfa.st/docs-old) instead</sub>
+[documentation](https://basedinbitcoin.com/docs-old) instead</sub>
 
 2. Follow the
-   [Ship In 5 Minutes Tutorial](https://shipfa.st/docs/tutorials/ship-in-5-minutes)
+   [Ship In 5 Minutes Tutorial](https://basedinbitcoin.com/docs/tutorials/ship-in-5-minutes)
    to learn the foundation and ship your app quickly ⚡️
 
 ## Links
 
-- [📚 Documentation](https://shipfa.st/docs)
+- [📚 Documentation](https://basedinbitcoin.com/docs)
 - [📣 Updates](https://basedinbitcoin.beehiiv.com/)
-- [🧑‍💻 Discord](https://shipfa.st/dashboard)
-- [🥇 Leaderboard](https://shipfa.st/leaderboard)
+- [🧑‍💻 Discord](https://basedinbitcoin.com/dashboard)
+- [🥇 Leaderboard](https://basedinbitcoin.com/leaderboard)
 
 ## Support
 
-Reach out at hello@shipfa.st
+Reach out at hello@basedinbitcoin.com
 
 Let's ship it, FAST ⚡️
 

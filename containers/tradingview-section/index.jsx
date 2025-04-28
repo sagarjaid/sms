@@ -12,6 +12,7 @@ const TradingViewSection = ({
   initialTitle = 'Apple Inc / BTC',
   page = 'stock',
   TopTitle = 'Stocks : ',
+  selectedTimespan = 'day',
 }) => {
   // Initialize our utility hooks
   const tradingViewLogic = useTradingViewLogic();
@@ -27,7 +28,6 @@ const TradingViewSection = ({
   const [selectedCurrencyTicker, setSelectedCurrencyTicker] =
     useState('BTCUSD');
   const [title, setTitle] = useState(initialTitle);
-  const [selectedTimespan, setSelectedTimespan] = useState('day');
   const [startDate, setStartDate] = useState(dateRanges.oneYearAgo);
   const [endDate, setEndDate] = useState(currentDateFormat);
 
