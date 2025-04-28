@@ -83,7 +83,7 @@ const Navbar = () => {
           />
         </svg>
       ),
-      slug: '/commodities',
+      slug: '/commodity',
     },
     {
       name: 'Indices',
@@ -100,7 +100,7 @@ const Navbar = () => {
           />
         </svg>
       ),
-      slug: '/indices',
+      slug: '/index',
     },
     {
       name: 'Real Estate',
@@ -134,7 +134,7 @@ const Navbar = () => {
           />
         </svg>
       ),
-      slug: '/bonds',
+      slug: '/bond',
     },
   ];
 

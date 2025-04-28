@@ -46,7 +46,7 @@ const commodityList = [
   { name: 'Wti Crude Oil', symbol: 'USO' },
   { name: 'Sugar', symbol: 'CANE' },
   { name: 'Corn', symbol: 'CORN' },
-  { name: 'COFFEE', symbol: 'COFE' },
+  { name: 'Coffee', symbol: 'COFE' },
   { name: 'Natural Gas', symbol: 'UNG' },
   { name: 'Wheat', symbol: 'WEAT' },
 ];
