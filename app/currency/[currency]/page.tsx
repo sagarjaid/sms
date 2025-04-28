@@ -66,7 +66,7 @@ export default function CurrencyPage({ params }: CurrencyPageProps) {
           <div className='flex justify-between w-full'>
             <div className='flex flex-col w-full h-screen  overflow-y-scroll'>
               <Header />
-              <div className='flex w-full'>
+              <div className='flex w-full h-screen'>
                 <CurrencyList currencyList={currencyList} />
                 <div className='w-full p-4'>
                   <TradingViewSection

@@ -58,7 +58,7 @@ export default function CommodityPage({ params }: CommodityPageProps) {
           <div className='flex justify-between w-full'>
             <div className='flex flex-col w-full h-screen  overflow-y-scroll'>
               <Header />
-              <div className='flex w-full'>
+              <div className='flex w-full h-screen'>
                 <CommodityList commoditiesList={commoditiesList} />
                 <div className='w-full p-4'>
                   <TradingViewSection

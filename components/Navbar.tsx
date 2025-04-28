@@ -100,7 +100,7 @@ const Navbar = () => {
           />
         </svg>
       ),
-      slug: '/index',
+      slug: '/indices',
     },
     {
       name: 'Real Estate',

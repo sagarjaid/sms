@@ -23,7 +23,7 @@ export default function CurrencyList({ currencyList }: CurrencyListProps) {
   };
 
   return (
-    <div className='w-52 max-h-[calc(100vh-80px)] border-r overflow-hidden hover:overflow-y-scroll'>
+    <div className='w-52 max-h-[calc(100vh-80px)] border-r overflow-hidden'>
       {currencyList.map((currency) => (
         <Link
           href={`/currency/${currency.symbol.toLowerCase()}-vs-btc`}
