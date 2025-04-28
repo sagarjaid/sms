@@ -186,39 +186,60 @@ export function AssetSearch() {
   }, [isOpen]);
 
   return (
-    <div className='relative w-full max-w-xl'>
+    <div className='relative w-full max-w-xl -ml-2'>
       {/* Search Input */}
 
       <div className='relative'>
-        <Input
-          ref={inputRef}
-          type='text'
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onClick={() => setIsOpen(true)}
-          placeholder='Search symbols or companies...'
-          className={cn(
-            'pl-10 h-12 pr-4 py-2 bg-muted/50 text-base border ',
-            isOpen ? 'rounded-b-none' : 'rounded-full'
-          )}
-        />
-        <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4' />
+        <div className='relative group'>
+          <div className='absolute -inset-[2px] bg-gradient-to-r from-green-600 via-blue-600 to-yellow-600 rounded-full blur-sm opacity-100 group-focus-within:opacity-0 transition-all duration-300 animate-gradient'></div>
+          <Input
+            ref={inputRef}
+            type='text'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onClick={() => setIsOpen(true)}
+            placeholder='Search symbols or companies...'
+            className={cn(
+              'relative pr-10 h-14 pl-4 py-2 bg-background text-base border-0 rounded-lg focus:outline-none focus:ring-0 focus:border',
+              isOpen ? 'rounded-b-none' : 'rounded-full'
+            )}
+          />
+        </div>
+        <Search className='absolute right-6 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4' />
         {searchTerm && (
           <Button
             variant='ghost'
             size='icon'
-            className='absolute right-2 top-1/2 transform -translate-y-1/2 h-6 w-6'
+            className='absolute right-12 top-1/2 transform -translate-y-1/2 h-6 w-6 text-muted-foreground'
             onClick={() => setSearchTerm('')}>
             <X className='h-3 w-3' />
           </Button>
         )}
       </div>
 
+      <style jsx>{`
+        @keyframes gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
+        }
+      `}</style>
+
       {/* Search Popup */}
       {isOpen && (
         <div
           ref={popupRef}
-          className='absolute top-12 left-0 w-full bg-background border border-t-0 rounded-lg  rounded-t-none shadow-lg z-50 max-h-[80vh] overflow-hidden flex flex-col'>
+          className='absolute top-14 left-0 w-full bg-background border border-t-0 rounded-lg  rounded-t-none shadow-lg z-10  h-[290px] max-h-[80vh] overflow-hidden flex flex-col'>
           <Tabs
             defaultValue='All'
             value={activeCategory}

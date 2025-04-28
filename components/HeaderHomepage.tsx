@@ -30,9 +30,9 @@ const HeaderHomepage = () => {
   };
 
   return (
-    <header className='border-b border-border sticky top-0 w-full z-10 bg-background'>
+    <header className='border-b border-border sticky  top-0 w-full z-50 bg-background'>
       <nav
-        className='w-full flex items-center justify-between p-4 lg:p-4'
+        className='w-full flex items-center justify-between max-w-7xl mx-auto p-4 lg:p-4'
         aria-label='Global'>
         <div className={`flex ${isAssetPage ? 'lg:hidden' : 'lg:block'}`}>
           <Link

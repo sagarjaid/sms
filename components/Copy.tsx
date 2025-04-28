@@ -1,30 +1,103 @@
 /** @format */
 import Image from 'next/image';
-import hero from '@/app/hero-2.png';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useState } from 'react';
+
+// Import chart images
+import stocksChart from '@/app/icons/stocks-chart.png';
+import commoditiesChart from '@/app/icons/commodities-chart.png';
+import currenciesChart from '@/app/icons/currencies-chart.png';
+import realEstateChart from '@/app/icons/real-estate-chart.png';
+import indicesChart from '@/app/icons/indices-chart.png';
+import bondsChart from '@/app/icons/bonds-chart.png';
+import Link from 'next/link';
 
 const Copy = () => {
+  const [selectedTab, setSelectedTab] = useState('Stocks');
+
+  const getImageForTab = (tab: string) => {
+    switch (tab) {
+      case 'Stocks':
+        return stocksChart;
+      case 'Commodities':
+        return commoditiesChart;
+      case 'Currencies':
+        return currenciesChart;
+      case 'Real Estate':
+        return realEstateChart;
+      case 'Indices':
+        return indicesChart;
+      case 'Bonds':
+        return bondsChart;
+      default:
+        return stocksChart;
+    }
+  };
+
   return (
-    <div className='flex flex-col gap-16 w-full justify-between items-center max-w-7xl mx-auto p-6  my-10 md:my-40'>
+    <div className='flex flex-col gap-16 w-full justify-between items-center max-w-7xl mx-auto pb-40'>
       <div className='flex flex-col justify-center items-center gap-4'>
-        <h1 className='font-extrabold text-3xl lg:text-4xl '>
-          Stay Updated 🚀
-        </h1>
+        <h1 className='font-extrabold text-3xl lg:text-4xl'>Stay Updated 🚀</h1>
         <div className='text-center md:text-left'>
-          Compare Asset Prices with Bitcoin’s Value Today
+          Compare Asset Prices with Bitcoin&apos;s Value Today
         </div>
       </div>
+
+      <div className='w-full max-w-2xl'>
+        <Tabs
+          defaultValue='Stocks'
+          className='w-full'
+          onValueChange={(value) => setSelectedTab(value)}>
+          <TabsList className='bg-transparent h-auto p-0 w-full justify-center'>
+            <TabsTrigger
+              value='Stocks'
+              className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
+              Stocks
+            </TabsTrigger>
+            <TabsTrigger
+              value='Commodities'
+              className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
+              Commodities
+            </TabsTrigger>
+            <TabsTrigger
+              value='Currencies'
+              className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
+              Currencies
+            </TabsTrigger>
+            <TabsTrigger
+              value='Real Estate'
+              className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
+              Real Estate
+            </TabsTrigger>
+            <TabsTrigger
+              value='Indices'
+              className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
+              Indices
+            </TabsTrigger>
+            <TabsTrigger
+              value='Bonds'
+              className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
+              Bonds
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
+
       <Image
-        src={hero}
-        alt='Product Demo'
-        className=' w-11/12 md:w-2/3 rounded-lg shadow-sm'
+        src={getImageForTab(selectedTab)}
+        alt={`${selectedTab} Chart Demo`}
+        className='w-11/12 md:w-2/3 rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-500'
         priority={true}
         width={500}
         height={500}
       />
-      <button className=' hidden w-fit md:flex gap-3 items-center text-lg px-4 py-2 text-gray-900 font-semibold border border-gray-700 rounded-lg'>
-        <span> Get Started</span>
+
+      <Link
+        href='/signin'
+        className='border border-gray-700 rounded-sm  gap-1.5 hover:bg-muted/80 text-muted-foreground font-bold py-4 px-6  flex items-center h-12 transition-colors'>
+        <span>Get Started</span>
         <span>🚀</span>
-      </button>
+      </Link>
     </div>
   );
 };

@@ -7,7 +7,7 @@ const config: ConfigProps = {
   appName: 'basedinbitcoin',
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
-    'The NextJS boilerplate with all you need to build your SaaS, AI tool, or any other web app.',
+    'Compare any asset values directly against Bitcoin’s current market price.',
   // REQUIRED (no https://, not trailing slash at the end, just the naked domain)
   domainName: 'basedinbitcoin.com',
   crisp: {

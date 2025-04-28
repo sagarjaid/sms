@@ -32,7 +32,7 @@ const ChartComponent = ({
 
   // Chart configuration
   const getChartConfig = (isDarkMode) => ({
-    width: chartContainerRef.current?.clientWidth || 0,
+    width: chartContainerRef.current.clientWidth,
     height: 550,
     layout: {
       background: { type: 'solid', color: 'transparent' },
@@ -53,20 +53,12 @@ const ChartComponent = ({
     rightPriceScale: {
       borderColor: isDarkMode ? '#4B5563' : '#4B5563',
       borderVisible: true,
-      scaleMargins: {
-        top: 0.1,
-        bottom: 0.1,
-      },
     },
     timeScale: {
       borderColor: isDarkMode ? '#4B5563' : '#4B5563',
       borderVisible: true,
       timeVisible: true,
       secondsVisible: false,
-      rightOffset: 12,
-      barSpacing: 6,
-      fixLeftEdge: true,
-      fixRightEdge: true,
       tickMarkFormatter: (time) => {
         return selectedTimespan === 'day'
           ? moment.utc(time).format('YYYY-MM-DD')
@@ -160,31 +152,8 @@ const ChartComponent = ({
       mode: isLogScale ? 1 : 0,
     });
 
-    // Handle container resize
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        if (chartRef.current && entry.target === chartContainerRef.current) {
-          const newWidth = entry.contentRect.width;
-          chartRef.current.applyOptions({
-            width: newWidth,
-            timeScale: {
-              rightOffset: 12,
-              barSpacing: 6,
-              fixLeftEdge: true,
-              fixRightEdge: true,
-            },
-          });
-          chartRef.current.timeScale().fitContent();
-        }
-      }
-    });
-
-    // Start observing the container
-    resizeObserver.observe(chartContainerRef.current);
-
     // Cleanup
     return () => {
-      resizeObserver.disconnect();
       if (chartRef.current) {
         chartRef.current.remove();
         chartRef.current = null;
@@ -267,8 +236,7 @@ const ChartComponent = ({
 
       <div
         ref={chartContainerRef}
-        className='w-full h-[550px]'
-        style={{ width: 'calc(100% - 2rem)' }}
+        style={{ width: '96%', height: '550px' }}
       />
       <div className='flex mt-2 items-center justify-center'>
         <div
