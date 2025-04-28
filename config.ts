@@ -76,9 +76,9 @@ const config: ConfigProps = {
     // REQUIRED — Email 'From' field to be used when sending magic login links
     fromNoReply: `basedinbitcoin <noreply@resend.basedinbitcoin.com>`,
     // REQUIRED — Email 'From' field to be used when sending other emails, like abandoned carts, updates etc..
-    fromAdmin: `Marc at basedinbitcoin <marc@resend.basedinbitcoin.com>`,
+    fromAdmin: `Kris at basedinbitcoin <basedinbitcoin@gmail.com>`,
     // Email shown to customer if need support. Leave empty if not needed => if empty, set up Crisp above, otherwise you won't be able to offer customer support."
-    supportEmail: 'marc.louvion@gmail.com',
+    supportEmail: 'basedinbitcoin@gmail.com',
   },
   colors: {
     // The primary color of your app
@@ -88,8 +88,8 @@ const config: ConfigProps = {
     // REQUIRED — the path to log in users. It's use to protect private routes (like /dashboard). It's used in apiClient (/libs/api.js) upon 401 errors from our API
     loginUrl: '/signin',
     // REQUIRED — the path you want to redirect users after successfull login (i.e. /dashboard, /private). This is normally a private page for users to manage their accounts. It's used in apiClient (/libs/api.js) upon 401 errors from our API & in ButtonSignin.js
-    callbackUrl: '/dashboard',
+    callbackUrl: '/dash',
   },
-};
+} as ConfigProps;
 
 export default config;
