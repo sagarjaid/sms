@@ -30,118 +30,113 @@ const ChartComponent = ({
   const chartRef = useRef(null);
   const seriesRef = useRef(null);
 
+  // Chart configuration
+  const getChartConfig = (isDarkMode) => ({
+    width: chartContainerRef.current.clientWidth,
+    height: 550,
+    layout: {
+      background: { type: 'solid', color: 'transparent' },
+      textColor: isDarkMode ? '#4B5563' : '#4B5563',
+    },
+    grid: {
+      vertLines: {
+        color: isDarkMode ? '#374151' : '#374151',
+        style: 1,
+        visible: true,
+      },
+      horzLines: {
+        color: isDarkMode ? '#374151' : '#374151',
+        style: 1,
+        visible: true,
+      },
+    },
+    rightPriceScale: {
+      borderColor: isDarkMode ? '#4B5563' : '#4B5563',
+      borderVisible: true,
+    },
+    timeScale: {
+      borderColor: isDarkMode ? '#4B5563' : '#4B5563',
+      borderVisible: true,
+      timeVisible: true,
+      secondsVisible: false,
+      tickMarkFormatter: (time) => {
+        return selectedTimespan === 'day'
+          ? moment.utc(time).format('YYYY-MM-DD')
+          : moment.utc(time).format('YYYY-MM-DD hh:mm');
+      },
+    },
+  });
+
+  // Series configuration
+  const getSeriesConfig = () => ({
+    color: '#10B981',
+    lineWidth: 2,
+    priceFormat: {
+      type: 'custom',
+      precision: 2,
+      minMove: 0.00001,
+      formatter: (price) => price.toFixed(5),
+    },
+  });
+
+  // Data conversion logic
+  const convertChartData = (data) => {
+    if (!data || data.length === 0) return [];
+
+    return data
+      .map((item) => {
+        const time =
+          selectedTimespan === 'day'
+            ? moment(item?.t || item?.stock?.t).format('YYYY-MM-DD')
+            : Math.floor((item?.t || item?.stock?.t) / 1000);
+
+        let value;
+        if (page === 'stock') {
+          value = item?.stock?.o / item?.currency?.o;
+        } else if (page === 'currency') {
+          value = item?.o > 1 ? 1 / item?.o : item?.o;
+        } else if (page === 'commodity') {
+          value = item?.stock?.o / item?.currency?.o;
+        }
+
+        return { time, value };
+      })
+      .filter((item) => item.value !== undefined && !isNaN(item.value));
+  };
+
+  // Chart initialization and update
   useEffect(() => {
     if (!chartContainerRef.current) return;
 
-    // Clean up previous chart instance if it exists
+    // Clean up previous chart instance
     if (chartRef.current) {
       chartRef.current.remove();
     }
 
-    // Detect dark mode
+    // Initialize chart
     const isDarkMode = document.documentElement.classList.contains('dark');
-
-    const chart = createChart(chartContainerRef.current, {
-      width: chartContainerRef.current.clientWidth,
-      height: 550,
-      layout: {
-        background: { type: 'solid', color: 'transparent' },
-        textColor: isDarkMode ? '#4B5563' : '#4B5563',
-      },
-      grid: {
-        vertLines: {
-          color: isDarkMode ? '#374151' : '#374151',
-          style: 1,
-          visible: true,
-        },
-        horzLines: {
-          color: isDarkMode ? '#374151' : '#374151',
-          style: 1,
-          visible: true,
-        },
-      },
-      rightPriceScale: {
-        borderColor: isDarkMode ? '#4B5563' : '#4B5563',
-        borderVisible: true,
-      },
-      timeScale: {
-        borderColor: isDarkMode ? '#4B5563' : '#4B5563',
-        borderVisible: true,
-        timeVisible: true,
-        secondsVisible: false,
-        tickMarkFormatter: (time) => {
-          return selectedTimespan == 'day'
-            ? moment.utc(time).format('YYYY-MM-DD')
-            : moment.utc(time).format('YYYY-MM-DD hh:mm');
-        },
-      },
-    });
-
-    // Store the chart instance in the ref
+    const chart = createChart(
+      chartContainerRef.current,
+      getChartConfig(isDarkMode)
+    );
     chartRef.current = chart;
 
-    // Create the series
-    const series = chart.addLineSeries({
-      color: '#10B981',
-      lineWidth: 2,
-      priceFormat: {
-        type: 'custom',
-        precision: 2,
-        minMove: page == 'stock' ? 0.00001 : 0.00001,
-        formatter: (price) => price.toFixed(5),
-      },
-    });
-
-    // Store the series in the ref
+    // Create and configure series
+    const series = chart.addLineSeries(getSeriesConfig());
     seriesRef.current = series;
 
-    // Convert and set the data
-    let convertedChartData = [];
-    if (page == 'stock') {
-      convertedChartData = chartData.map((item) => ({
-        time:
-          selectedTimespan == 'day'
-            ? moment(item?.stock?.t).format('YYYY-MM-DD')
-            : Math.floor(item?.stock?.t / 1000),
-        value: item?.stock?.o / item?.currency?.o,
-      }));
-    } else if (page == 'currency') {
-      convertedChartData = chartData.map((item) => ({
-        time:
-          selectedTimespan == 'day'
-            ? moment(item?.t).format('YYYY-MM-DD')
-            : Math.floor(item?.t / 1000),
-        value: item?.o > 1 ? 1 / item?.o : item?.o,
-      }));
-    } else if (page == 'commodity') {
-      convertedChartData = chartData.map((item) => ({
-        time:
-          selectedTimespan == 'day'
-            ? moment(item?.stock?.t).format('YYYY-MM-DD')
-            : Math.floor(item?.stock?.t / 1000),
-        value: item?.stock?.o / item?.currency?.o,
-      }));
-    }
+    // Convert and set data
+    const convertedData = convertChartData(chartData);
+    series.setData(convertedData);
+    setDownloadChartData(convertedData);
 
-    // Set the data
-    series.setData(convertedChartData);
-    setDownloadChartData(convertedChartData);
-
-    // Fit the content
+    // Fit content and handle scale
     chart.timeScale().fitContent();
+    chart.priceScale('right').applyOptions({
+      mode: isLogScale ? 1 : 0,
+    });
 
-    // Handle log scale
-    if (isLogScale) {
-      chart.priceScale('right').applyOptions({
-        mode: 1, // Logarithmic mode
-      });
-    } else {
-      chart.priceScale('right').applyOptions({
-        mode: 0, // Linear mode
-      });
-    }
-
-    // Cleanup function
+    // Cleanup
     return () => {
       if (chartRef.current) {
         chartRef.current.remove();
@@ -151,27 +146,23 @@ const ChartComponent = ({
     };
   }, [chartData, selectedTimespan, page, isLogScale]);
 
+  // Download data handler
   const downloadData = () => {
-    // Column headers based on the object keys
     const headersTitle = ['Date', 'Value'];
-    const csvRows = [headersTitle.join(',')]; // Add the headers as the first row
+    const csvRows = [headersTitle.join(',')];
 
     downloadChartData.forEach((item) => {
-      let row = [];
-      row.push(item.time);
-      row.push(item.value);
+      const row = [item.time, item.value];
       csvRows.push(row.join(','));
     });
 
     const csvString = csvRows.join('\n');
-
     const blob = new Blob([csvString], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
 
     const link = document.createElement('a');
     link.href = url;
-    link.download = retitle + '_chartData.csv';
-
+    link.download = `${retitle}_chartData.csv`;
     link.click();
 
     URL.revokeObjectURL(url);

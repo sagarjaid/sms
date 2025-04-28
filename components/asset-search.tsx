@@ -58,9 +58,7 @@ const currencyList = [
   { symbol: 'BTCGBP', name: 'GBP / BTC' },
   { symbol: 'BTCJPY', name: 'JPY / BTC' },
   { symbol: 'ETHBTC', name: 'ETH / BTC' },
-  { symbol: 'BNBBTC', name: 'BNB / BTC' },
   { symbol: 'LTCBTC', name: 'LTC / BTC' },
-  { symbol: 'BTCDOGE', name: 'DOGE / BTC' },
   { symbol: 'XRPBTC', name: 'XRP / BTC' },
 ];
 

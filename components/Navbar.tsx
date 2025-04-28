@@ -66,7 +66,7 @@ const Navbar = () => {
           />
         </svg>
       ),
-      slug: '/currencies',
+      slug: '/currency',
     },
     {
       name: 'Commodities',

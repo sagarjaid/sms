@@ -10,6 +10,8 @@ const TradingViewSection = ({
   stocksList = [],
   initialStockTicker = 'AAPL',
   initialTitle = 'Apple Inc / BTC',
+  page = 'stock',
+  TopTitle = 'Stocks : ',
 }) => {
   // Initialize our utility hooks
   const tradingViewLogic = useTradingViewLogic();
@@ -32,6 +34,7 @@ const TradingViewSection = ({
   // Data states
   const [stockData, setStockData] = useState([]);
   const [currencyData, setCurrencyData] = useState([]);
+  const [BTCData, setBTCData] = useState([]);
   const [chartData, setChartData] = useState([]);
 
   // Currency list
@@ -42,9 +45,7 @@ const TradingViewSection = ({
     { symbol: 'BTCGBP', name: 'GBP / BTC' },
     { symbol: 'BTCJPY', name: 'JPY / BTC' },
     { symbol: 'ETHBTC', name: 'ETH / BTC' },
-    { symbol: 'BNBBTC', name: 'BNB / BTC' },
     { symbol: 'LTCBTC', name: 'LTC / BTC' },
-    { symbol: 'BTCDOGE', name: 'DOGE / BTC' },
     { symbol: 'XRPBTC', name: 'XRP / BTC' },
   ];
 
@@ -57,38 +58,72 @@ const TradingViewSection = ({
         startDate,
         endDate
       );
-      setStockData(data);
+      setStockData(data || []);
     };
 
     const getCurrencyData = async () => {
       const data = await tradingViewLogic.fetchCurrencyData(
-        selectedCurrencyTicker,
+        page === 'currency' ? selectedStockTicker : selectedCurrencyTicker,
         selectedTimespan,
         startDate,
-        endDate
+        endDate,
+        page
       );
-      setCurrencyData(data);
+      setCurrencyData(data || []);
     };
 
-    getStockData();
+    const getBTCData = async () => {
+      const data = await tradingViewLogic.fetchCurrencyData(
+        'BTCUSD',
+        selectedTimespan,
+        startDate,
+        endDate,
+        'currency'
+      );
+      setBTCData(data || []);
+    };
+
+    if (page === 'stock') {
+      getStockData();
+    }
     getCurrencyData();
+    getBTCData();
   }, [
     startDate,
     endDate,
     selectedStockTicker,
     selectedTimespan,
     selectedCurrencyTicker,
+    page,
   ]);
 
   // Merge chart data
   useEffect(() => {
-    const mergedData = tradingViewLogic.mergeStockAndCurrencyData(
-      stockData,
-      currencyData,
-      selectedTimespan
-    );
-    setChartData([...mergedData]);
-  }, [stockData, currencyData, selectedTimespan]);
+    if (page === 'currency') {
+      // For currency page, we need to process the currency data differently
+      if (Array.isArray(currencyData) && currencyData.length > 0) {
+        const processedData = currencyData.map((item) => ({
+          t: item.t,
+          o: item.o > 1 ? 1 / item.o : item.o,
+          h: item.h > 1 ? 1 / item.h : item.h,
+          l: item.l > 1 ? 1 / item.l : item.l,
+          c: item.c > 1 ? 1 / item.c : item.c,
+          v: item.v,
+          n: item.n,
+        }));
+        setChartData(processedData);
+      } else {
+        setChartData([]);
+      }
+    } else {
+      const mergedData = tradingViewLogic.mergeStockAndCurrencyData(
+        stockData || [],
+        currencyData || [],
+        selectedTimespan
+      );
+      setChartData([...mergedData]);
+    }
+  }, [stockData, currencyData, selectedTimespan, page]);
 
   // Set date range based on period button
   const setDateRangeByPeriod = (period) => {
@@ -103,7 +138,7 @@ const TradingViewSection = ({
         chartData={chartData}
         selectedTimespan={selectedTimespan}
         title={title}
-        TopTitle='Stocks : '
+        TopTitle={TopTitle}
         stocksList={stocksList}
         seletedStockTicker={selectedStockTicker}
         setSeletedStockTicker={(e) => setSelectedStockTicker(e)}
@@ -115,6 +150,7 @@ const TradingViewSection = ({
         currencyList={currencyList}
         selectedCurrencyTicker={selectedCurrencyTicker}
         setSelectedCurrencyTicker={(e) => setSelectedCurrencyTicker(e)}
+        page={page}
       />
     </div>
   );

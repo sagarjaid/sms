@@ -54,9 +54,9 @@ export const useTradingViewLogic = () => {
     endDate
   ) => {
     try {
-      const response = await axios.get(
-        `${API_URL}X:${currencyTicker}/range/1/${timespan}/${startDate}/${endDate}?apiKey=${API_KEY}`
-      );
+      const url = `${API_URL}X:${currencyTicker}/range/1/${timespan}/${startDate}/${endDate}?apiKey=${API_KEY}`;
+      console.log('Fetching:', url);
+      const response = await axios.get(url);
       return response.data.results;
     } catch (error) {
       console.error('Failed to fetch currency data:', error);
