@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 import Navbar from '@/components/Navbar';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { assetData } from './assetData';
+import { assetData } from '@/app/all/assetData';
 
 // Define types for our assets
 interface Asset {

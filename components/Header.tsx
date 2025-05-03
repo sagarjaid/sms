@@ -4,52 +4,44 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useSearchParams, usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import config from '@/config';
-import logo from '@/app/logo.png';
-import logo2 from '@/app/logo-2.png';
 import { Button } from '@/components/ui/button-2';
 import { AssetSearch } from './asset-search';
+import Logo from './Logo';
 
 const Header = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const shouldShowSearch = pathname?.match(
     /^\/(stock|currency|commodity|indices|real-estate|bond|all)/
   );
 
-  const getLogo = () => {
-    return theme === 'dark' ? logo2 : logo;
-  };
-
   useEffect(() => {
     setIsOpen(false);
   }, [searchParams]);
 
+  // Prevent flash of wrong theme
+  if (!mounted) {
+    return null;
+  }
+
   return (
-    <header className='border-b border-border sticky top-0 w-full z-50 bg-background'>
+    <header className='border-b border-border sticky top-0 w-full z-40 bg-background'>
       <nav
         className='w-full flex items-center justify-between p-4'
         aria-label='Global'>
         <div className={`flex ${shouldShowSearch ? 'lg:hidden' : 'lg:block'}`}>
-          <Link
-            className='flex items-center mt-1 gap-2 shrink-0'
-            href='/'
-            title={`${config.appName} homepage`}>
-            <Image
-              src={getLogo()}
-              alt={`${config.appName} logo`}
-              className={`transition-all duration-300 w-[130px]`}
-              priority={true}
-              width={100}
-              height={50}
-            />
-          </Link>
+          <Logo priority={true} />
         </div>
         <div className='flex lg:hidden'>
           <Button
@@ -100,9 +92,11 @@ const Header = () => {
             variant='ghost'
             size='icon'
             className='border'
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+            onClick={() =>
+              setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+            }>
             <span className='sr-only'>Toggle theme</span>
-            {theme === 'dark' ? (
+            {resolvedTheme === 'dark' ? (
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -119,7 +113,7 @@ const Header = () => {
             ) : (
               <svg
                 xmlns='http://www.w3.org/2000/svg'
-                fill='black'
+                fill='none'
                 viewBox='0 0 24 24'
                 strokeWidth={1.5}
                 stroke='currentColor'
@@ -197,19 +191,7 @@ const Header = () => {
         <div className='fixed inset-0 bg-background/80 backdrop-blur-sm' />
         <div className='fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-background border-l border-border p-4 sm:max-w-sm sm:ring-1 sm:ring-border'>
           <div className='flex items-center justify-between'>
-            <Link
-              className='flex items-center mt-1 gap-2 shrink-0'
-              href='/'
-              title={`${config.appName} homepage`}>
-              <Image
-                src={getLogo()}
-                alt={`${config.appName} logo`}
-                className={`transition-all duration-300 w-[130px]`}
-                priority={true}
-                width={100}
-                height={50}
-              />
-            </Link>
+            <Logo priority={true} />
             <Button
               variant='ghost'
               size='icon'
@@ -251,14 +233,17 @@ const Header = () => {
                 </Link> */}
               </div>
             </div>
-            <div className='-ml-2 py-6'>
+            <div className='-ml-1 pb-4'>
               <div className='flex items-center gap-x-4'>
                 <Button
+                  className='border'
                   variant='ghost'
                   size='icon'
-                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+                  onClick={() =>
+                    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+                  }>
                   <span className='sr-only'>Toggle theme</span>
-                  {theme === 'dark' ? (
+                  {resolvedTheme === 'dark' ? (
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       fill='none'

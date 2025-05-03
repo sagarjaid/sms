@@ -33,7 +33,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           attribute='class'
           defaultTheme='system'
           enableSystem
-          disableTransitionOnChange>
+          disableTransitionOnChange
+          storageKey='theme'
+          forcedTheme={undefined}>
           {/* ClientLayout contains all the client wrappers (Crisp chat support, toast messages, tooltips, etc.) */}
           <ClientLayout>{children}</ClientLayout>
         </ThemeProvider>

@@ -6,11 +6,8 @@ import config from '@/config';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
-import Image from 'next/image';
-import logo from '@/app/logo.png';
-import logo2 from '@/app/logo-2.png';
-import icon from '@/app/icon.png';
 import { useTheme } from 'next-themes';
+import Logo from './Logo';
 
 const Navbar = () => {
   const pathName = usePathname();
@@ -20,13 +17,6 @@ const Navbar = () => {
 
   const toggleNavbar = () => {
     setIsCollapsed(!isCollapsed);
-  };
-
-  const getLogo = () => {
-    if (isCollapsed) {
-      return icon;
-    }
-    return theme === 'dark' ? logo2 : logo;
   };
 
   const fillters = [
@@ -138,18 +128,18 @@ const Navbar = () => {
     },
   ];
 
-  const isActive = (slug: string) => {
-    return pathName === slug || pathName.startsWith(`${slug}/`);
+  const isActive = (path: string) => {
+    return pathName === path;
   };
 
   return (
     <div
-      className={`hidden h-screen  lg:flex flex-col justify-between z-20 border-r border-border cursor-pointer sticky top-0 transition-all duration-300 bg-background ${
+      className={`hidden h-screen  lg:flex flex-col justify-between z-50 border-r border-border cursor-pointer sticky top-0 transition-all duration-300 bg-background ${
         isCollapsed ? 'w-[80px]' : 'min-w-[200px]'
       }`}>
       <button
         onClick={toggleNavbar}
-        className='absolute -right-3 top-7  bg-background rounded-full p-1 border border-border shadow-sm hover:bg-muted transition-colors'>
+        className='absolute -right-3 top-7   bg-background rounded-full p-1 border border-border shadow-sm hover:bg-muted transition-colors'>
         <svg
           className='w-4 h-4 text-foreground'
           fill='none'
@@ -170,21 +160,12 @@ const Navbar = () => {
       </button>
 
       <div className='flex flex-col gap-3'>
-        <Link
-          className='flex items-center p-4 mt-1 gap-2 shrink-0'
-          href='/'
-          title={`${config.appName} homepage`}>
-          <Image
-            src={getLogo()}
-            alt={`${config.appName} logo`}
-            className={`transition-all duration-300 ${
-              isCollapsed ? 'w-[40px]' : 'w-[130px]'
-            }`}
+        <div className='p-4 mt-1'>
+          <Logo
+            isCollapsed={isCollapsed}
             priority={true}
-            width={100}
-            height={50}
           />
-        </Link>
+        </div>
 
         <div className='flex flex-col -mt-[1.5px]'>
           {fillters.map((el, i) => {

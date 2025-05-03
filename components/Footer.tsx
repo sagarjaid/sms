@@ -3,11 +3,9 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import config from '@/config';
-import logo from '@/app/logo.png';
-import logo2 from '@/app/logo-2.png';
 import { useTheme } from 'next-themes';
+import Logo from './Logo';
 
 // Add the Footer to the bottom of your landing page and more.
 // The support link is connected to the config.js file. If there's no config.resend.supportEmail, the link won't be displayed.
@@ -15,29 +13,15 @@ import { useTheme } from 'next-themes';
 const Footer = () => {
   const { theme } = useTheme();
 
-  const getLogo = () => {
-    return theme === 'dark' ? logo2 : logo;
-  };
-
   return (
     <footer className='border-t border-border bg-background'>
       <div className='max-w-7xl mx-auto px-8 py-24'>
         <div className='flex lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col'>
           <div className='w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left'>
-            <Link
-              className='flex items-center justify-center md:justify-start gap-2'
-              href='/'
-              title={`${config.appName} homepage`}>
-              <Image
-                src={getLogo()}
-                alt={`${config.appName} logo`}
-                className='w-[130px] transition-all duration-300'
-                placeholder='blur'
-                priority={true}
-                width={100}
-                height={50}
-              />
-            </Link>
+            <Logo
+              className='justify-center md:justify-start'
+              priority={true}
+            />
 
             <p className='mt-3 text-sm text-muted-foreground'>
               {config.appDescription}
