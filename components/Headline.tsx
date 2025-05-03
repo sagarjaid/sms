@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 const Headline = () => {
   return (
-    <div className='relative md:h-screen flex flex-col md:flex-row gap-6 md:gap-2 w-full justify-between md:items-start my-20 md:mt-20 md:mb-0  mx-auto p-6 overflow-hidden'>
+    <div className='relative md:h-screen flex flex-col md:flex-row gap-6 md:gap-2 w-full justify-between md:items-start my-20 md:mt-8 md:my-0  mx-auto p-6 overflow-hidden'>
       <div className='flex flex-col items-center md:items-start gap-4 md:w-1/2 relative md:mt-28 z-10 md:pl-20'>
         <button className='relative flex w-fit items-center px-2.5 py-0.5 font-semibold border text-xs sdm:text-base rounded-lg'>
           LIVE
@@ -47,12 +47,11 @@ const Headline = () => {
         <div className='text-center ml-2 text-xs text-gray-400'>
           200 traders searched over 2499 times today!
         </div>
-        <div className='grid grid-cols-4 gap-3 mt-6 w-fit'>
+        <div className='grid grid-cols-3 gap-3 mt-6 w-fit lg:w-[380px]'>
           {[
             { name: 'Apple', symbol: 'AAPL', category: 'stock' },
             { name: 'Gold', symbol: 'GLD', category: 'commodity' },
             { name: 'S&P500', symbol: 'SPY', category: 'indices' },
-            { name: 'Ethereum', symbol: 'ETHBTC', category: 'currency' },
           ].map((asset) => (
             <Link
               key={asset.symbol}
@@ -76,7 +75,7 @@ const Headline = () => {
         </div>
       </div>
 
-      <div className='hidden md:block absolute right-0 top-80 -translate-y-1/2 w-1/2 overflow-hidden'>
+      <div className='hidden md:block absolute right-0 top-80 -translate-y-1/2 w-1/2  overflow-hidden'>
         <div className='relative w-full'>
           <div className='flex flex-col transform translate-x-[14%]'>
             <div className='bg-gray-100 rounded-l-2xl rounded-bl-none p-2 flex items-center gap-2 border border-gray-200'>
