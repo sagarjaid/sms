@@ -128,7 +128,7 @@ const Header = () => {
           </Button>
 
           <Link
-            href='/signin'
+            href='/all'
             className='border border-border rounded-sm  gap-1.5 hover:bg-muted/80 text-muted-foreground font-bold py-1 px-2  flex items-center h-10 transition-colors'>
             {/* <svg
               xmlns='http://www.w3.org/2000/svg'
