@@ -1,5 +1,7 @@
 /** @format */
 
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import config from '@/config';
@@ -59,7 +61,7 @@ const Footer = () => {
                 </Link>
                 <Link
                   href='/commodity/gld-vs-btc'
-                  className='text-sm font-semibold leading-6 text-foreground/80 hover:text-foreground transition-colors'>
+                  className='text-sm  leading-6 text-foreground/80 hover:text-foreground transition-colors'>
                   Commodities
                 </Link>
                 <Link

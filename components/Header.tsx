@@ -5,42 +5,50 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import config from '@/config';
-import logo from '@/app/icon.png';
+import logo from '@/app/logo.png';
+import logo2 from '@/app/logo-2.png';
 import { Button } from '@/components/ui/button-2';
 import { AssetSearch } from './asset-search';
 
 const Header = () => {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { theme, setTheme } = useTheme();
+
+  const shouldShowSearch = pathname?.match(
+    /^\/(stock|currency|commodity|indices|real-estate|bond|all)/
+  );
+
+  const getLogo = () => {
+    return theme === 'dark' ? logo2 : logo;
+  };
 
   useEffect(() => {
     setIsOpen(false);
   }, [searchParams]);
 
   return (
-    <header className='border-b border-border sticky top-0 w-full z-10 bg-background'>
+    <header className='border-b border-border sticky top-0 w-full z-50 bg-background'>
       <nav
         className='w-full flex items-center justify-between p-4'
         aria-label='Global'>
-        <div className='flex lg:hidden'>
+        <div className={`flex ${shouldShowSearch ? 'lg:hidden' : 'lg:block'}`}>
           <Link
-            className='flex items-center gap-2 shrink-0'
+            className='flex items-center mt-1 gap-2 shrink-0'
             href='/'
             title={`${config.appName} homepage`}>
             <Image
-              src={logo}
+              src={getLogo()}
               alt={`${config.appName} logo`}
-              className='w-8'
-              placeholder='blur'
+              className={`transition-all duration-300 w-[130px]`}
               priority={true}
-              width={32}
-              height={32}
+              width={100}
+              height={50}
             />
-            <span className='font-extrabold text-lg'>{config.appName}</span>
           </Link>
         </div>
         <div className='flex lg:hidden'>
@@ -66,31 +74,32 @@ const Header = () => {
         </div>
 
         <div className='hidden lg:flex lg:flex-1'>
-          <AssetSearch />
+          {shouldShowSearch && <AssetSearch />}
         </div>
 
         <div className='hidden items-center lg:flex lg:flex-1 lg:justify-end lg:gap-x-4'>
-          <div className='hidden lg:flex lg:gap-x-8'>
+          {/* <div className='hidden lg:flex lg:gap-x-8'>
             <Link
-              href='/#features'
+              href='/'
               className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
               Home
             </Link>
             <Link
-              href='/#pricing'
+              href='/all'
               className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
-              Pricing
+              All Asset Links
             </Link>
             <Link
               href='/blog'
               className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
               Blog
             </Link>
-          </div>
+          </div> */}
 
           <Button
             variant='ghost'
             size='icon'
+            className='border'
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
             <span className='sr-only'>Toggle theme</span>
             {theme === 'dark' ? (
@@ -127,7 +136,7 @@ const Header = () => {
           <Link
             href='/signin'
             className='border border-border rounded-sm  gap-1.5 hover:bg-muted/80 text-muted-foreground font-bold py-1 px-2  flex items-center h-10 transition-colors'>
-            <svg
+            {/* <svg
               xmlns='http://www.w3.org/2000/svg'
               className='w-5 h-5'
               viewBox='0 0 48 48'>
@@ -147,8 +156,38 @@ const Header = () => {
                 fill='#1976D2'
                 d='M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z'
               />
+            </svg> */}
+
+            <span className='text-xs'>All Asset Links</span>
+
+            <svg
+              fill='none'
+              className='w-4 h-4'
+              strokeWidth={2}
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+              xmlns='http://www.w3.org/2000/svg'
+              aria-hidden='true'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125'
+              />
             </svg>
-            <span className='text-xs'>Login with Google</span>
+            {/* <svg
+              fill='none'
+              className='w-3 h-3'
+              strokeWidth={3}
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+              xmlns='http://www.w3.org/2000/svg'
+              aria-hidden='true'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='m8.25 4.5 7.5 7.5-7.5 7.5'
+              />
+            </svg> */}
           </Link>
         </div>
       </nav>
@@ -156,22 +195,20 @@ const Header = () => {
       {/* Mobile menu */}
       <div className={`lg:hidden ${isOpen ? 'fixed inset-0 z-50' : 'hidden'}`}>
         <div className='fixed inset-0 bg-background/80 backdrop-blur-sm' />
-        <div className='fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-background p-4 sm:max-w-sm sm:ring-1 sm:ring-border'>
+        <div className='fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-background border-l border-border p-4 sm:max-w-sm sm:ring-1 sm:ring-border'>
           <div className='flex items-center justify-between'>
             <Link
-              className='flex items-center gap-2 shrink-0'
-              title={`${config.appName} homepage`}
-              href='/'>
+              className='flex items-center mt-1 gap-2 shrink-0'
+              href='/'
+              title={`${config.appName} homepage`}>
               <Image
-                src={logo}
+                src={getLogo()}
                 alt={`${config.appName} logo`}
-                className='w-8'
-                placeholder='blur'
+                className={`transition-all duration-300 w-[130px]`}
                 priority={true}
-                width={32}
-                height={32}
+                width={100}
+                height={50}
               />
-              <span className='font-extrabold text-lg'>{config.appName}</span>
             </Link>
             <Button
               variant='ghost'
@@ -198,23 +235,23 @@ const Header = () => {
             <div className='py-4'>
               <div className='flex flex-col gap-y-4 items-start'>
                 <Link
-                  href='/#features'
+                  href='/'
                   className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
-                  Features
+                  Home
                 </Link>
                 <Link
-                  href='/#pricing'
+                  href='/all'
                   className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
-                  Pricing
+                  All Asset Links
                 </Link>
-                <Link
+                {/* <Link
                   href='/blog'
                   className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
                   Blog
-                </Link>
+                </Link> */}
               </div>
             </div>
-            <div className='py-6'>
+            <div className='-ml-2 py-6'>
               <div className='flex items-center gap-x-4'>
                 <Button
                   variant='ghost'
@@ -252,7 +289,7 @@ const Header = () => {
                   )}
                 </Button>
 
-                <Button
+                {/* <Button
                   asChild
                   variant='default'>
                   <Link
@@ -260,7 +297,7 @@ const Header = () => {
                     className='text-sm font-semibold leading-6'>
                     Log in <span aria-hidden='true'>&rarr;</span>
                   </Link>
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>

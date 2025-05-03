@@ -1,4 +1,6 @@
 /** @format */
+'use client';
+
 import Image from 'next/image';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useState } from 'react';
@@ -31,6 +33,25 @@ const Copy = () => {
         return bondsChart;
       default:
         return stocksChart;
+    }
+  };
+
+  const getSlugForTab = (tab: string) => {
+    switch (tab) {
+      case 'Stocks':
+        return 'stock';
+      case 'Commodities':
+        return 'commodity';
+      case 'Currencies':
+        return 'currency';
+      case 'Real Estate':
+        return 'real-estate';
+      case 'Indices':
+        return 'indices';
+      case 'Bonds':
+        return 'bond';
+      default:
+        return 'all';
     }
   };
 
@@ -93,9 +114,9 @@ const Copy = () => {
       />
 
       <Link
-        href='/signin'
+        href={`/${getSlugForTab(selectedTab)}`}
         className='border border-gray-700 rounded-sm  gap-1.5 hover:bg-muted/80 text-muted-foreground font-bold py-4 px-6  flex items-center h-12 transition-colors'>
-        <span>Get Started</span>
+        <span>Continue to {selectedTab}</span>
         <span>🚀</span>
       </Link>
     </div>

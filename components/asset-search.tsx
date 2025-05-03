@@ -218,7 +218,7 @@ export function AssetSearch() {
       {isOpen && (
         <div
           ref={popupRef}
-          className='absolute top-12 left-0 w-full bg-background border border-t-0 rounded-lg  rounded-t-none shadow-lg z-50 max-h-[80vh] overflow-hidden flex flex-col'>
+          className='absolute top-12 left-0 w-full bg-background border border-t-0 rounded-lg  rounded-t-none shadow-lg z-10 max-h-[80vh] overflow-hidden flex flex-col'>
           <Tabs
             defaultValue='All'
             value={activeCategory}

@@ -9,8 +9,8 @@ import { AssetSearch } from './asset-search-home';
 
 const Headline = () => {
   return (
-    <div className='relative h-screen flex flex-col md:flex-row gap-6 md:gap-2 w-full justify-between items-start mt-20  mx-auto p-6 overflow-hidden'>
-      <div className='flex flex-col items-center md:items-start gap-4 md:w-1/2 relative mt-32 z-10 pl-20'>
+    <div className='relative h-screen flex flex-col md:flex-row gap-6 md:gap-2 w-full justify-between md:items-start mt-20  mx-auto p-6 overflow-hidden'>
+      <div className='flex flex-col items-center md:items-start gap-4 md:w-1/2 relative mt-32 z-10 md:pl-20'>
         <button className='relative flex w-fit items-center px-2.5 py-0.5 font-semibold border text-xs sdm:text-base rounded-lg'>
           LIVE
           <span className='absolute -top-1 -right-1 flex h-3 w-3'>
@@ -52,7 +52,7 @@ const Headline = () => {
         </div>
       </div>
 
-      <div className='absolute right-0 top-80 -translate-y-1/2 w-1/2 overflow-hidden'>
+      <div className='hidden md:block absolute right-0 top-80 -translate-y-1/2 w-1/2 overflow-hidden'>
         <div className='relative w-full'>
           <div className='flex flex-col transform translate-x-[14%]'>
             <div className='bg-gray-100 rounded-l-lg rounded-bl-none p-2 flex items-center gap-2 border border-gray-200'>
