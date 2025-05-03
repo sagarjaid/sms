@@ -6,11 +6,12 @@ import Typewriter from 'typewriter-effect';
 import Image from 'next/image';
 import hero from '@/app/hero.png';
 import { AssetSearch } from './asset-search-home';
+import Link from 'next/link';
 
 const Headline = () => {
   return (
-    <div className='relative h-screen flex flex-col md:flex-row gap-6 md:gap-2 w-full justify-between md:items-start mt-20  mx-auto p-6 overflow-hidden'>
-      <div className='flex flex-col items-center md:items-start gap-4 md:w-1/2 relative mt-32 z-10 md:pl-20'>
+    <div className='relative md:h-screen flex flex-col md:flex-row gap-6 md:gap-2 w-full justify-between md:items-start my-20 md:mt-20 md:mb-0  mx-auto p-6 overflow-hidden'>
+      <div className='flex flex-col items-center md:items-start gap-4 md:w-1/2 relative md:mt-28 z-10 md:pl-20'>
         <button className='relative flex w-fit items-center px-2.5 py-0.5 font-semibold border text-xs sdm:text-base rounded-lg'>
           LIVE
           <span className='absolute -top-1 -right-1 flex h-3 w-3'>
@@ -42,20 +43,43 @@ const Headline = () => {
         <div className='text-center ml-2 md:text-left'>
           Track asset prices in real-time against Bitcoin (BTC)
         </div>
-        {/* <button className=' hidden w-fit md:flex gap-3 items-center text-lg px-4 py-2 text-gray-900 font-semibold border border-gray-900 rounded-lg'>
-          <span> Get Started</span>
-          <span>🚀</span>
-        </button> */}
         <AssetSearch />
         <div className='text-center ml-2 text-xs text-gray-400'>
           200 traders searched over 2499 times today!
+        </div>
+        <div className='grid grid-cols-4 gap-3 mt-6 w-fit'>
+          {[
+            { name: 'Apple', symbol: 'AAPL', category: 'stock' },
+            { name: 'Gold', symbol: 'GLD', category: 'commodity' },
+            { name: 'S&P500', symbol: 'SPY', category: 'indices' },
+            { name: 'Ethereum', symbol: 'ETHBTC', category: 'currency' },
+          ].map((asset) => (
+            <Link
+              key={asset.symbol}
+              href={
+                asset.category === 'currency'
+                  ? `/${asset.category}/${asset.symbol.toLowerCase()}`
+                  : `/${asset.category}/${asset.symbol.toLowerCase()}-vs-btc`
+              }
+              className='p-3 border rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer hover:bg-muted/50 block'>
+              <div className='font-semibold text-foreground text-sm'>
+                {asset.name}
+              </div>
+              <div className='text-[8px] mt-1 text-muted-foreground'>
+                {asset.symbol} vs BTC
+              </div>
+              <div className='text-[10px] text-muted-foreground/70 mt-0.5'>
+                {asset.category}
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
 
       <div className='hidden md:block absolute right-0 top-80 -translate-y-1/2 w-1/2 overflow-hidden'>
         <div className='relative w-full'>
           <div className='flex flex-col transform translate-x-[14%]'>
-            <div className='bg-gray-100 rounded-l-lg rounded-bl-none p-2 flex items-center gap-2 border border-gray-200'>
+            <div className='bg-gray-100 rounded-l-2xl rounded-bl-none p-2 flex items-center gap-2 border border-gray-200'>
               <div className='flex gap-1.5'>
                 <div className='w-3 h-3 rounded-full bg-red-500'></div>
                 <div className='w-3 h-3 rounded-full bg-yellow-500'></div>
@@ -69,7 +93,7 @@ const Headline = () => {
               <Image
                 src={hero}
                 alt='Product Demo'
-                className='h-[500px] w-auto object-cover object-left rounded-tl-none rounded-l-lg shadow-lg border border-gray-200 border-t-0 border-r-0 box-border'
+                className='h-[500px] w-auto object-cover object-left rounded-tl-none rounded-l-2xl shadow-xl border border-gray-500 border-1.5 border-t-0 border-r-0 box-border'
                 priority={true}
                 width={2000}
                 height={2000}
@@ -78,10 +102,6 @@ const Headline = () => {
           </div>
         </div>
       </div>
-      <button className='flex w-fit md:hidden gap-3 items-center text-lg px-4 py-2 text-gray-900 font-semibold border border-gray-900 rounded-lg'>
-        <span> Get Started</span>
-        <span>🚀</span>
-      </button>
     </div>
   );
 };

@@ -216,9 +216,9 @@ const ChartComponent = ({
   };
 
   return (
-    <div className='flex flex-col gap-2'>
-      <div className='flex gap-4 mb-5 justify-between lg:flex-row flex-col items-center'>
-        <div className=' font-bold text-lg sm:text-xl'>
+    <div className='flex flex-col gap-2 overflow-hidden'>
+      <div className='flex gap-4 mb-5 justify-between lg:flex-row flex-col items-start md:items-center'>
+        <div className=' font-bold text-lg text-left sm:text-xl w-full'>
           {TopTitle + retitle}
         </div>
 
@@ -272,7 +272,7 @@ const ChartComponent = ({
       />
       <div className='flex mt-2 items-center justify-center'>
         <div
-          className='flex gap-6 w-full rounded-md transition duration-150 ease-in-out'
+          className='flex gap-3 md:gap-6 w-full rounded-md transition duration-150 ease-in-out'
           role='group'>
           <button
             type='button'

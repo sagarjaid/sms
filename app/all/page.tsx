@@ -4,11 +4,13 @@
 
 import { Suspense } from 'react';
 import Header from '@/components/Header';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { assetData } from '@/app/all/assetData';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
 
 // Define types for our assets
 interface Asset {
@@ -46,6 +48,8 @@ function AssetCard({ asset }: AssetCardProps) {
 }
 
 function AssetGrid() {
+  const [activeCategory, setActiveCategory] = useState('All');
+
   const allAssets = useMemo(
     () => [
       // Stocks
@@ -90,14 +94,53 @@ function AssetGrid() {
     []
   );
 
+  const filteredAssets = useMemo(() => {
+    if (activeCategory === 'All') return allAssets;
+    return allAssets.filter((asset) => asset.category === activeCategory);
+  }, [allAssets, activeCategory]);
+
+  const categories = [
+    { name: 'All', value: 'All' },
+    { name: 'Stocks', value: 'stock' },
+    { name: 'Commodities', value: 'commodity' },
+    { name: 'Currencies', value: 'currency' },
+    { name: 'Real Estate', value: 'real-estate' },
+    { name: 'Indices', value: 'indices' },
+    { name: 'Bonds', value: 'bond' },
+  ];
+
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-      {allAssets.map((asset) => (
-        <AssetCard
-          key={asset.symbol}
-          asset={asset}
-        />
-      ))}
+    <div className='space-y-4'>
+      <Tabs
+        defaultValue='All'
+        value={activeCategory}
+        onValueChange={setActiveCategory}
+        className='w-full'>
+        <div className='border-b hover:overflow-x-auto'>
+          <TabsList className='bg-transparent h-auto p-0'>
+            {categories.map((category) => (
+              <TabsTrigger
+                key={category.value}
+                value={category.value}
+                className={cn(
+                  'px-4 py-1.5 my-2 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground',
+                  category.value === 'All' && 'm-1'
+                )}>
+                {category.name}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </div>
+      </Tabs>
+
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+        {filteredAssets.map((asset) => (
+          <AssetCard
+            key={asset.symbol}
+            asset={asset}
+          />
+        ))}
+      </div>
     </div>
   );
 }

@@ -69,38 +69,40 @@ const Copy = () => {
           defaultValue='Stocks'
           className='w-full'
           onValueChange={(value) => setSelectedTab(value)}>
-          <TabsList className='bg-transparent h-auto p-0 w-full justify-center'>
-            <TabsTrigger
-              value='Stocks'
-              className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
-              Stocks
-            </TabsTrigger>
-            <TabsTrigger
-              value='Commodities'
-              className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
-              Commodities
-            </TabsTrigger>
-            <TabsTrigger
-              value='Currencies'
-              className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
-              Currencies
-            </TabsTrigger>
-            <TabsTrigger
-              value='Real Estate'
-              className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
-              Real Estate
-            </TabsTrigger>
-            <TabsTrigger
-              value='Indices'
-              className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
-              Indices
-            </TabsTrigger>
-            <TabsTrigger
-              value='Bonds'
-              className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
-              Bonds
-            </TabsTrigger>
-          </TabsList>
+          <div className='overflow-x-auto pb-2'>
+            <TabsList className='bg-transparent h-auto p-0 w-full justify-start min-w-max'>
+              <TabsTrigger
+                value='Stocks'
+                className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
+                Stocks
+              </TabsTrigger>
+              <TabsTrigger
+                value='Commodities'
+                className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
+                Commodities
+              </TabsTrigger>
+              <TabsTrigger
+                value='Currencies'
+                className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
+                Currencies
+              </TabsTrigger>
+              <TabsTrigger
+                value='Real Estate'
+                className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
+                Real Estate
+              </TabsTrigger>
+              <TabsTrigger
+                value='Indices'
+                className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
+                Indices
+              </TabsTrigger>
+              <TabsTrigger
+                value='Bonds'
+                className='px-4 py-1.5 m-1 rounded-full data-[state=active]:bg-muted data-[state=active]:text-foreground'>
+                Bonds
+              </TabsTrigger>
+            </TabsList>
+          </div>
         </Tabs>
       </div>
 
