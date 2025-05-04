@@ -22,18 +22,18 @@ import { AssetSearch } from '@/components/asset-search';
 import Navbar from '@/components/Navbar';
 import IndicesList from '@/components/IndicesList';
 
-interface IndexPageProps {
+interface IndicesPageProps {
   params: {
-    index: string;
+    indices: string;
   };
 }
 
-export default function IndexPage({ params }: IndexPageProps) {
+export default function IndicesPage({ params }: IndicesPageProps) {
   const path = usePathname();
-  const index = params.index;
+  const indices = params.indices;
 
-  // Extract index symbol from URL (e.g., "spy-vs-btc" -> "SPY")
-  const indexSymbol = index.split('-')[0].toUpperCase();
+  // Extract indices symbol from URL (e.g., "spy-vs-btc" -> "SPY")
+  const indicesSymbol = indices.split('-')[0].toUpperCase();
 
   // Define indicesList array
   const indicesList = useMemo(
@@ -48,9 +48,11 @@ export default function IndexPage({ params }: IndexPageProps) {
     []
   );
 
-  // Find index name from indicesList
-  const indexInfo = indicesList.find((index) => index.symbol === indexSymbol);
-  const indexName = indexInfo ? indexInfo.name : 'Unknown Index';
+  // Find indices name from indicesList
+  const indicesInfo = indicesList.find(
+    (indices) => indices.symbol === indicesSymbol
+  );
+  const indicesName = indicesInfo ? indicesInfo.name : 'Unknown Index';
 
   return (
     <>
@@ -65,8 +67,10 @@ export default function IndexPage({ params }: IndexPageProps) {
                 <div className='w-full p-4'>
                   <TradingViewSection
                     stocksList={indicesList}
-                    initialStockTicker={indexSymbol}
-                    initialTitle={`${indexName} / BTC`}
+                    initialStockTicker={indicesSymbol}
+                    initialTitle={`${indicesName} / BTC`}
+                    TopTitle='Indices: '
+                    selectedTimespan='day'
                   />
                 </div>
               </div>

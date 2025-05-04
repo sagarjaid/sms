@@ -86,6 +86,8 @@ export default function StockPage({ params }: StockPageProps) {
                     stocksList={stocksList}
                     initialStockTicker={stockSymbol}
                     initialTitle={`${stockName} / BTC`}
+                    TopTitle='Stocks: '
+                    selectedTimespan='day'
                   />
                 </div>
               </div>

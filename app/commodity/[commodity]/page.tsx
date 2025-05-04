@@ -65,6 +65,8 @@ export default function CommodityPage({ params }: CommodityPageProps) {
                     stocksList={commoditiesList}
                     initialStockTicker={commoditySymbol}
                     initialTitle={`${commodityName} / BTC`}
+                    TopTitle='Commodities: '
+                    selectedTimespan='day'
                   />
                 </div>
               </div>

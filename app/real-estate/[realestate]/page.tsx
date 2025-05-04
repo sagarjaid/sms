@@ -70,6 +70,8 @@ export default function RealEstatePage({ params }: RealEstatePageProps) {
                     stocksList={realEstateList}
                     initialStockTicker={realEstateSymbol}
                     initialTitle={`${realEstateName} / BTC`}
+                    TopTitle='Real Estate: '
+                    selectedTimespan='day'
                   />
                 </div>
               </div>

@@ -68,6 +68,8 @@ export default function BondPage({ params }: BondPageProps) {
                     stocksList={bondsList}
                     initialStockTicker={bondSymbol}
                     initialTitle={`${bondName} / BTC`}
+                    TopTitle='Bonds: '
+                    selectedTimespan='day'
                   />
                 </div>
               </div>
