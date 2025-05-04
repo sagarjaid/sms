@@ -6,7 +6,7 @@ import Typewriter from 'typewriter-effect';
 import Image from 'next/image';
 import hero from '@/app/hero.png';
 import { AssetSearch } from './asset-search-home';
-import Link from 'next/link';
+import AssetCard from './AssetCard';
 
 const Headline = () => {
   return (
@@ -53,24 +53,12 @@ const Headline = () => {
             { name: 'Gold', symbol: 'GLD', category: 'commodity' },
             { name: 'S&P500', symbol: 'SPY', category: 'indices' },
           ].map((asset) => (
-            <Link
+            <AssetCard
               key={asset.symbol}
-              href={
-                asset.category === 'currency'
-                  ? `/${asset.category}/${asset.symbol.toLowerCase()}`
-                  : `/${asset.category}/${asset.symbol.toLowerCase()}-vs-btc`
-              }
-              className='p-3 border rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer hover:bg-muted/50 block'>
-              <div className='font-semibold text-foreground text-sm'>
-                {asset.name}
-              </div>
-              <div className='text-[8px] mt-1 text-muted-foreground'>
-                {asset.symbol} vs BTC
-              </div>
-              <div className='text-[10px] text-muted-foreground/70 mt-0.5'>
-                {asset.category}
-              </div>
-            </Link>
+              name={asset.name}
+              symbol={asset.symbol}
+              category={asset.category}
+            />
           ))}
         </div>
       </div>
