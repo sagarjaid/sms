@@ -5,6 +5,7 @@ import { Bricolage_Grotesque } from 'next/font/google';
 import { Viewport } from 'next';
 import { getSEOTags } from '@/lib/seo';
 import ClientLayout from '@/components/LayoutClient';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 import config from '@/config';
 import './globals.css';
 import { ThemeProvider } from '../components/theme-provider';
@@ -26,6 +27,9 @@ export const metadata = getSEOTags({
   description:
     "Compare any asset values directly against Bitcoin's current market price.",
   canonicalUrlRelative: '/',
+  extraTags: {
+    'google-site-verification': 'bpVto528QOEsbHsk4o2dP8yL3DMcQb6kFWjoQUgSoq0',
+  },
 });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -42,6 +46,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           disableTransitionOnChange
           storageKey='theme'
           forcedTheme={undefined}>
+          <GoogleAnalytics />
           {/* ClientLayout contains all the client wrappers (Crisp chat support, toast messages, tooltips, etc.) */}
           <ClientLayout>{children}</ClientLayout>
         </ThemeProvider>
