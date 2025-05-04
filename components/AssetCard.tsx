@@ -25,7 +25,7 @@ const AssetCard = ({ name, symbol, category }: AssetCardProps) => {
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
   useEffect(() => {
-    const fetchAssetData = async (daysAgo = 0) => {
+    const fetchAssetData = async (daysAgo = 0): Promise<void> => {
       try {
         // Get current date and one day ago
         const currentDate = moment()
