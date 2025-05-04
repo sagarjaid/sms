@@ -1,16 +1,7 @@
 /** @format */
 
-'use client';
-
-import { Suspense } from 'react';
-import Header from '@/components/Header';
-import { useState, useMemo } from 'react';
-import TradingViewSection from '@/containers/tradingview-section';
-import CommodityTable from '@/containers/commodity-table';
-import Navbar from '@/components/Navbar';
-import { usePathname } from 'next/navigation';
-import { AssetSearch } from '@/components/asset-search';
-import CommodityList from '@/components/CommodityList';
+import { Metadata } from 'next';
+import CommodityPageClient from './client.page';
 
 interface CommodityPageProps {
   params: {
@@ -18,31 +9,26 @@ interface CommodityPageProps {
   };
 }
 
-export default function CommodityPage({ params }: CommodityPageProps) {
-  const path = usePathname();
-  const commodity = params.commodity;
+// Generate metadata for SEO
+export async function generateMetadata({
+  params,
+}: CommodityPageProps): Promise<Metadata> {
+  const commoditySymbol = params.commodity.split('-')[0].toUpperCase();
 
-  // Extract commodity symbol from URL (e.g., "gld-vs-btc" -> "GLD")
-  const commoditySymbol = commodity.split('-')[0].toUpperCase();
+  // Define commoditiesList array to get commodity name
+  const commoditiesList = [
+    { name: 'Gold', symbol: 'GLD' },
+    { name: 'Silver', symbol: 'SLV' },
+    { name: 'Copper', symbol: 'CPER' },
+    { name: 'Platinum', symbol: 'PPLT' },
+    { name: 'Wti Crude Oil', symbol: 'USO' },
+    { name: 'Sugar', symbol: 'CANE' },
+    { name: 'Corn', symbol: 'CORN' },
+    { name: 'Coffee', symbol: 'COFE' },
+    { name: 'Natural Gas', symbol: 'UNG' },
+    { name: 'Wheat', symbol: 'WEAT' },
+  ];
 
-  // Define commoditiesList array
-  const commoditiesList = useMemo(
-    () => [
-      { name: 'Gold', symbol: 'GLD' },
-      { name: 'Silver', symbol: 'SLV' },
-      { name: 'Copper', symbol: 'CPER' },
-      { name: 'Platinum', symbol: 'PPLT' },
-      { name: 'Wti Crude Oil', symbol: 'USO' },
-      { name: 'Sugar', symbol: 'CANE' },
-      { name: 'Corn', symbol: 'CORN' },
-      { name: 'Coffee', symbol: 'COFE' },
-      { name: 'Natural Gas', symbol: 'UNG' },
-      { name: 'Wheat', symbol: 'WEAT' },
-    ],
-    []
-  );
-
-  // Find commodity name from commoditiesList
   const commodityInfo = commoditiesList.find(
     (commodity) => commodity.symbol === commoditySymbol
   );
@@ -50,30 +36,23 @@ export default function CommodityPage({ params }: CommodityPageProps) {
     ? commodityInfo.name
     : 'Unknown Commodity';
 
-  return (
-    <>
-      <main>
-        <div className='flex w-full text-xs '>
-          <Navbar />
-          <div className='flex justify-between w-full'>
-            <div className='flex flex-col w-full h-screen  overflow-y-scroll'>
-              <Header />
-              <div className='flex w-full h-screen'>
-                <CommodityList commoditiesList={commoditiesList} />
-                <div className='w-full p-4'>
-                  <TradingViewSection
-                    stocksList={commoditiesList}
-                    initialStockTicker={commoditySymbol}
-                    initialTitle={`${commodityName} / BTC`}
-                    TopTitle='Commodities: '
-                    selectedTimespan='day'
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </>
-  );
+  return {
+    title: `${commodityName} vs Bitcoin | ${commoditySymbol} vs BTC Price Comparison — BasedinBitcoin`,
+    description: `Compare ${commodityName} (${commoditySymbol}) price with Bitcoin (BTC). View real-time price charts, historical data, and market analysis for ${commoditySymbol} vs BTC.`,
+    keywords: `${commoditySymbol}, Bitcoin, BTC, commodity price, cryptocurrency, market analysis, price comparison, trading chart`,
+    openGraph: {
+      title: `${commodityName} vs Bitcoin | ${commoditySymbol} vs BTC Price Comparison — BasedinBitcoin`,
+      description: `Compare ${commodityName} (${commoditySymbol}) price with Bitcoin (BTC). View real-time price charts and market analysis.`,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${commodityName} vs Bitcoin | ${commoditySymbol} vs BTC Price Comparison — BasedinBitcoin`,
+      description: `Compare ${commodityName} (${commoditySymbol}) price with Bitcoin (BTC). View real-time price charts and market analysis.`,
+    },
+  };
+}
+
+export default function CommodityPage({ params }: CommodityPageProps) {
+  return <CommodityPageClient commodity={params.commodity} />;
 }

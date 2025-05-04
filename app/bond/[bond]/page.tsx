@@ -1,26 +1,7 @@
 /** @format */
 
-'use client';
-
-import { Suspense } from 'react';
-import Header from '@/components/Header';
-// import ButtonSubmitYT from '@/components/ButtonSubmitYT';
-// import ChannelList from '@/components/ChannelList';
-// import Navbar from '@/components/Navbar';
-
-import { useState, useMemo } from 'react';
-import TradingViewSection from '@/containers/tradingview-section';
-import BondsTable from '@/containers/bonds-table';
-
-import Image from 'next/image';
-import hero from '@/app/hero.png';
-// import DashboardSection from '@/containers/dashboard-page';
-import { usePathname } from 'next/navigation';
-// import ThemeToggle from '@/components/ThemeToggle';
-import Link from 'next/link';
-import { AssetSearch } from '@/components/asset-search';
-import Navbar from '@/components/Navbar';
-import BondList from '@/components/BondList';
+import { Metadata } from 'next';
+import BondPageClient from './client.page';
 
 interface BondPageProps {
   params: {
@@ -28,55 +9,43 @@ interface BondPageProps {
   };
 }
 
-export default function BondPage({ params }: BondPageProps) {
-  const path = usePathname();
-  const bond = params.bond;
+// Generate metadata for SEO
+export async function generateMetadata({
+  params,
+}: BondPageProps): Promise<Metadata> {
+  const bondSymbol = params.bond.split('-')[0].toUpperCase();
 
-  // Extract bond symbol from URL (e.g., "govt-vs-btc" -> "GOVT")
-  const bondSymbol = bond.split('-')[0].toUpperCase();
+  // Define bondsList array to get bond name
+  const bondsList = [
+    { name: 'iShares U.S. Treasury Bond ETF', symbol: 'GOVT' },
+    { name: 'iShares Core U.S. Aggregate Bond ETF', symbol: 'AGG' },
+    {
+      name: 'iShares iBoxx $ Investment Grade Corporate Bond',
+      symbol: 'LQD',
+    },
+    { name: 'iShares MBS ETF', symbol: 'MBB' },
+  ];
 
-  // Define bondsList array
-  const bondsList = useMemo(
-    () => [
-      { name: 'iShares U.S. Treasury Bond ETF', symbol: 'GOVT' },
-      { name: 'iShares Core U.S. Aggregate Bond ETF', symbol: 'AGG' },
-      {
-        name: 'iShares iBoxx $ Investment Grade Corporate Bond',
-        symbol: 'LQD',
-      },
-      { name: 'iShares MBS ETF', symbol: 'MBB' },
-    ],
-    []
-  );
-
-  // Find bond name from bondsList
   const bondInfo = bondsList.find((bond) => bond.symbol === bondSymbol);
   const bondName = bondInfo ? bondInfo.name : 'Unknown Bond';
 
-  return (
-    <>
-      <main>
-        <div className='flex w-full text-xs '>
-          <Navbar />
-          <div className='flex justify-between w-full'>
-            <div className='flex flex-col w-full h-screen overflow-y-scroll'>
-              <Header />
-              <div className='flex w-full h-screen'>
-                <BondList bondsList={bondsList} />
-                <div className='w-full p-4'>
-                  <TradingViewSection
-                    stocksList={bondsList}
-                    initialStockTicker={bondSymbol}
-                    initialTitle={`${bondName} / BTC`}
-                    TopTitle='Bonds: '
-                    selectedTimespan='day'
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </>
-  );
+  return {
+    title: `${bondName} vs Bitcoin | ${bondSymbol} vs BTC Price Comparison — BasedinBitcoin`,
+    description: `Compare ${bondName} (${bondSymbol}) price with Bitcoin (BTC). View real-time price charts, historical data, and market analysis for ${bondSymbol} vs BTC.`,
+    keywords: `${bondSymbol}, Bitcoin, BTC, bond price, cryptocurrency, market analysis, price comparison, trading chart`,
+    openGraph: {
+      title: `${bondName} vs Bitcoin | ${bondSymbol} vs BTC Price Comparison — BasedinBitcoin`,
+      description: `Compare ${bondName} (${bondSymbol}) price with Bitcoin (BTC). View real-time price charts and market analysis.`,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${bondName} vs Bitcoin | ${bondSymbol} vs BTC Price Comparison — BasedinBitcoin`,
+      description: `Compare ${bondName} (${bondSymbol}) price with Bitcoin (BTC). View real-time price charts and market analysis.`,
+    },
+  };
+}
+
+export default function BondPage({ params }: BondPageProps) {
+  return <BondPageClient bond={params.bond} />;
 }

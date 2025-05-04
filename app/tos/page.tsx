@@ -29,6 +29,8 @@ import config from '@/config';
 
 export const metadata = getSEOTags({
   title: `Terms and Conditions | ${config.appName}`,
+  description:
+    'Read the terms and conditions for using BasedinBitcoin to track and compare asset prices against Bitcoin.',
   canonicalUrlRelative: '/tos',
 });
 

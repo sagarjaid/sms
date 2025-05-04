@@ -4,7 +4,7 @@ import { ConfigProps } from './types/config';
 
 const config: ConfigProps = {
   // REQUIRED
-  appName: 'basedinbitcoin',
+  appName: 'BasedinBitcoin',
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
     'Compare any asset values directly against Bitcoin’s current market price.',

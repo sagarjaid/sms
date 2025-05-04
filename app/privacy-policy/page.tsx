@@ -29,6 +29,8 @@ import config from '@/config';
 
 export const metadata = getSEOTags({
   title: `Privacy Policy | ${config.appName}`,
+  description:
+    'Learn about how BasedinBitcoin protects your privacy and handles your data while you track and compare asset prices against Bitcoin.',
   canonicalUrlRelative: '/privacy-policy',
 });
 

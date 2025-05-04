@@ -1,27 +1,7 @@
 /** @format */
 
-'use client';
-
-import { Suspense } from 'react';
-import Header from '@/components/Header';
-// import ButtonSubmitYT from '@/components/ButtonSubmitYT';
-// import ChannelList from '@/components/ChannelList';
-// import Navbar from '@/components/Navbar';
-
-import { useState, useMemo } from 'react';
-import TradingViewSection from '@/containers/tradingview-section';
-import StocksTable from '@/containers/stocks-table';
-
-import Image from 'next/image';
-import hero from '@/app/hero.png';
-// import DashboardSection from '@/containers/dashboard-page';
-import { usePathname } from 'next/navigation';
-// import ThemeToggle from '@/components/ThemeToggle';
-import Link from 'next/link';
-import { AssetSearch } from '@/components/asset-search';
-import Navbar from '@/components/Navbar';
-import StockList from '@/components/StockList';
-import RealEstateList from '@/components/RealEstateList';
+import { Metadata } from 'next';
+import RealEstatePageClient from './client.page';
 
 interface RealEstatePageProps {
   params: {
@@ -29,25 +9,20 @@ interface RealEstatePageProps {
   };
 }
 
-export default function RealEstatePage({ params }: RealEstatePageProps) {
-  const path = usePathname();
-  const realestate = params.realestate;
+// Generate metadata for SEO
+export async function generateMetadata({
+  params,
+}: RealEstatePageProps): Promise<Metadata> {
+  const realEstateSymbol = params.realestate.split('-')[0].toUpperCase();
 
-  // Extract real estate symbol from URL (e.g., "rwo-vs-btc" -> "RWO")
-  const realEstateSymbol = realestate.split('-')[0].toUpperCase();
+  // Define realEstateList array to get real estate name
+  const realEstateList = [
+    { name: 'SPDR Dow Jones Global Real Estate ETF', symbol: 'RWO' },
+    { name: 'Invesco NASDAQ ETF', symbol: 'IYR' },
+    { name: 'iShares U.S. Real Estate ETF', symbol: 'IYY' },
+    { name: 'iShares Global REIT ETF', symbol: 'REET' },
+  ];
 
-  // Define realEstateList array
-  const realEstateList = useMemo(
-    () => [
-      { name: 'SPDR Dow Jones Global Real Estate ETF', symbol: 'RWO' },
-      { name: 'Invesco NASDAQ ETF', symbol: 'IYR' },
-      { name: 'iShares U.S. Real Estate ETF', symbol: 'IYY' },
-      { name: 'iShares Global REIT ETF', symbol: 'REET' },
-    ],
-    []
-  );
-
-  // Find real estate name from realEstateList
   const realEstateInfo = realEstateList.find(
     (realEstate) => realEstate.symbol === realEstateSymbol
   );
@@ -55,30 +30,23 @@ export default function RealEstatePage({ params }: RealEstatePageProps) {
     ? realEstateInfo.name
     : 'Unknown Real Estate';
 
-  return (
-    <>
-      <main>
-        <div className='flex w-full text-xs '>
-          <Navbar />
-          <div className='flex justify-between w-full'>
-            <div className='flex flex-col w-full h-screen  overflow-y-scroll'>
-              <Header />
-              <div className='flex w-full h-screen'>
-                <RealEstateList realEstateList={realEstateList} />
-                <div className='w-full p-4'>
-                  <TradingViewSection
-                    stocksList={realEstateList}
-                    initialStockTicker={realEstateSymbol}
-                    initialTitle={`${realEstateName} / BTC`}
-                    TopTitle='Real Estate: '
-                    selectedTimespan='day'
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </>
-  );
+  return {
+    title: `${realEstateName} vs Bitcoin | ${realEstateSymbol} vs BTC Price Comparison — BasedinBitcoin`,
+    description: `Compare ${realEstateName} (${realEstateSymbol}) price with Bitcoin (BTC). View real-time price charts, historical data, and market analysis for ${realEstateSymbol} vs BTC.`,
+    keywords: `${realEstateSymbol}, Bitcoin, BTC, real estate ETF, REIT, cryptocurrency, market analysis, price comparison, trading chart`,
+    openGraph: {
+      title: `${realEstateName} vs Bitcoin | ${realEstateSymbol} vs BTC Price Comparison — BasedinBitcoin`,
+      description: `Compare ${realEstateName} (${realEstateSymbol}) price with Bitcoin (BTC). View real-time price charts and market analysis.`,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${realEstateName} vs Bitcoin | ${realEstateSymbol} vs BTC Price Comparison — BasedinBitcoin`,
+      description: `Compare ${realEstateName} (${realEstateSymbol}) price with Bitcoin (BTC). View real-time price charts and market analysis.`,
+    },
+  };
+}
+
+export default function RealEstatePage({ params }: RealEstatePageProps) {
+  return <RealEstatePageClient realestate={params.realestate} />;
 }

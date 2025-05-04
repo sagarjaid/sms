@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { assetData } from '@/app/all/assetData';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
+import config from '@/config';
 
 // Define types for our assets
 interface Asset {

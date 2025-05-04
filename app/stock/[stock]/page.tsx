@@ -1,26 +1,7 @@
 /** @format */
 
-'use client';
-
-import { Suspense } from 'react';
-import Header from '@/components/Header';
-// import ButtonSubmitYT from '@/components/ButtonSubmitYT';
-// import ChannelList from '@/components/ChannelList';
-// import Navbar from '@/components/Navbar';
-
-import { useState, useMemo } from 'react';
-import TradingViewSection from '@/containers/tradingview-section';
-import StocksTable from '@/containers/stocks-table';
-
-import Image from 'next/image';
-import hero from '@/app/hero.png';
-// import DashboardSection from '@/containers/dashboard-page';
-import { usePathname } from 'next/navigation';
-// import ThemeToggle from '@/components/ThemeToggle';
-import Link from 'next/link';
-import { AssetSearch } from '@/components/asset-search';
-import Navbar from '@/components/Navbar';
-import StockList from '@/components/StockList';
+import { Metadata } from 'next';
+import StockPageClient from './client.page';
 
 interface StockPageProps {
   params: {
@@ -28,73 +9,61 @@ interface StockPageProps {
   };
 }
 
-export default function StockPage({ params }: StockPageProps) {
-  const path = usePathname();
-  const stock = params.stock;
+// Generate metadata for SEO
+export async function generateMetadata({
+  params,
+}: StockPageProps): Promise<Metadata> {
+  const stockSymbol = params.stock.split('-')[0].toUpperCase();
 
-  // Extract stock symbol from URL (e.g., "aapl-vs-btc" -> "AAPL")
-  const stockSymbol = stock.split('-')[0].toUpperCase();
+  // Define stocksList array to get stock name
+  const stocksList = [
+    { name: 'Apple', symbol: 'AAPL' },
+    { name: 'Tesla', symbol: 'TSLA' },
+    { name: 'Microsoft', symbol: 'MSFT' },
+    { name: 'Nvidia', symbol: 'NVDA' },
+    { name: 'Amazon', symbol: 'AMZN' },
+    { name: 'Alphabet', symbol: 'GOOGL' },
+    { name: 'Meta', symbol: 'META' },
+    { name: 'Berkshire Hathaway', symbol: 'BRK.B' },
+    { name: 'ExxonMobil', symbol: 'XOM' },
+    { name: 'BP', symbol: 'BP' },
+    { name: 'Marathon Digital', symbol: 'MARA' },
+    { name: 'Microstrategy', symbol: 'MSTR' },
+    { name: 'JPMorgan Chase', symbol: 'JPM' },
+    { name: 'Goldman Sachs', symbol: 'GS' },
+    { name: 'Mastercard', symbol: 'MA' },
+    { name: 'Visa', symbol: 'V' },
+    { name: 'Disney', symbol: 'DIS' },
+    { name: 'LVMH', symbol: 'NKE' },
+    { name: 'Pepsi', symbol: 'PEP' },
+    { name: 'Coca Cola', symbol: 'KO' },
+    { name: 'CSL', symbol: 'CSL' },
+    { name: 'TSMC', symbol: 'TSM' },
+    { name: 'General Electric', symbol: 'GE' },
+    { name: 'General Motors', symbol: 'GM' },
+    { name: 'Ford Motor', symbol: 'F' },
+  ];
 
-  // Define stocksList array
-  const stocksList = useMemo(
-    () => [
-      { name: 'Apple', symbol: 'AAPL' },
-      { name: 'Tesla', symbol: 'TSLA' },
-      { name: 'Microsoft', symbol: 'MSFT' },
-      { name: 'Nvidia', symbol: 'NVDA' },
-      { name: 'Amazon', symbol: 'AMZN' },
-      { name: 'Alphabet', symbol: 'GOOGL' },
-      { name: 'Meta', symbol: 'META' },
-      { name: 'Berkshire Hathaway', symbol: 'BRK.B' },
-      { name: 'ExxonMobil', symbol: 'XOM' },
-      { name: 'BP', symbol: 'BP' },
-      { name: 'Marathon Digital', symbol: 'MARA' },
-      { name: 'Microstrategy', symbol: 'MSTR' },
-      { name: 'JPMorgan Chase', symbol: 'JPM' },
-      { name: 'Goldman Sachs', symbol: 'GS' },
-      { name: 'Mastercard', symbol: 'MA' },
-      { name: 'Visa', symbol: 'V' },
-      { name: 'Disney', symbol: 'DIS' },
-      { name: 'LVMH', symbol: 'NKE' },
-      { name: 'Pepsi', symbol: 'PEP' },
-      { name: 'Coca Cola', symbol: 'KO' },
-      { name: 'CSL', symbol: 'CSL' },
-      { name: 'TSMC', symbol: 'TSM' },
-      { name: 'General Electric', symbol: 'GE' },
-      { name: 'General Motors', symbol: 'GM' },
-      { name: 'Ford Motor', symbol: 'F' },
-    ],
-    []
-  );
-
-  // Find stock name from stocksList
   const stockInfo = stocksList.find((stock) => stock.symbol === stockSymbol);
   const stockName = stockInfo ? stockInfo.name : 'Unknown Stock';
 
-  return (
-    <>
-      <main>
-        <div className='flex w-full text-xs '>
-          <Navbar />
-          <div className='flex justify-between w-full'>
-            <div className='flex flex-col w-full h-screen  overflow-y-scroll'>
-              <Header />
-              <div className='flex w-full'>
-                <StockList stocksList={stocksList} />
-                <div className='w-full p-4'>
-                  <TradingViewSection
-                    stocksList={stocksList}
-                    initialStockTicker={stockSymbol}
-                    initialTitle={`${stockName} / BTC`}
-                    TopTitle='Stocks: '
-                    selectedTimespan='day'
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </>
-  );
+  return {
+    title: `${stockName} vs Bitcoin | ${stockSymbol} vs BTC Price Comparison — BasedinBitcoin`,
+    description: `Compare ${stockName} (${stockSymbol}) stock price with Bitcoin (BTC). View real-time price charts, historical data, and market analysis for ${stockSymbol} vs BTC.`,
+    keywords: `${stockSymbol}, Bitcoin, BTC, stock price, cryptocurrency, market analysis, price comparison, trading chart`,
+    openGraph: {
+      title: `${stockName} vs Bitcoin | ${stockSymbol} vs BTC Price Comparison — BasedinBitcoin`,
+      description: `Compare ${stockName} (${stockSymbol}) stock price with Bitcoin (BTC). View real-time price charts and market analysis.`,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${stockName} vs Bitcoin | ${stockSymbol} vs BTC Price Comparison — BasedinBitcoin`,
+      description: `Compare ${stockName} (${stockSymbol}) stock price with Bitcoin (BTC). View real-time price charts and market analysis.`,
+    },
+  };
+}
+
+export default function StockPage({ params }: StockPageProps) {
+  return <StockPageClient stock={params.stock} />;
 }

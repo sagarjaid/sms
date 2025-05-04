@@ -1,26 +1,7 @@
 /** @format */
 
-'use client';
-
-import { Suspense } from 'react';
-import Header from '@/components/Header';
-// import ButtonSubmitYT from '@/components/ButtonSubmitYT';
-// import ChannelList from '@/components/ChannelList';
-// import Navbar from '@/components/Navbar';
-
-import { useState, useMemo } from 'react';
-import TradingViewSection from '@/containers/tradingview-section';
-import IndicesTable from '@/containers/indices-table';
-
-import Image from 'next/image';
-import hero from '@/app/hero.png';
-// import DashboardSection from '@/containers/dashboard-page';
-import { usePathname } from 'next/navigation';
-// import ThemeToggle from '@/components/ThemeToggle';
-import Link from 'next/link';
-import { AssetSearch } from '@/components/asset-search';
-import Navbar from '@/components/Navbar';
-import IndicesList from '@/components/IndicesList';
+import { Metadata } from 'next';
+import IndicesPageClient from './client.page';
 
 interface IndicesPageProps {
   params: {
@@ -28,56 +9,44 @@ interface IndicesPageProps {
   };
 }
 
-export default function IndicesPage({ params }: IndicesPageProps) {
-  const path = usePathname();
-  const indices = params.indices;
+// Generate metadata for SEO
+export async function generateMetadata({
+  params,
+}: IndicesPageProps): Promise<Metadata> {
+  const indicesSymbol = params.indices.split('-')[0].toUpperCase();
 
-  // Extract indices symbol from URL (e.g., "spy-vs-btc" -> "SPY")
-  const indicesSymbol = indices.split('-')[0].toUpperCase();
+  // Define indicesList array to get indices name
+  const indicesList = [
+    { name: 'S&P500 ETF', symbol: 'SPY' },
+    { name: 'Invesco NASDAQ ETF', symbol: 'QQQ' },
+    { name: 'iShares Dow Jones ETF', symbol: 'IYY' },
+    { name: 'iShares Bitcoin Trust', symbol: 'IBIT' },
+    { name: 'Fidelity Wise Origin Bitcoin Trust', symbol: 'FBTC' },
+    { name: 'Grayscale Bitcoin Trust', symbol: 'GBTC' },
+  ];
 
-  // Define indicesList array
-  const indicesList = useMemo(
-    () => [
-      { name: 'S&P500 ETF', symbol: 'SPY' },
-      { name: 'Invesco NASDAQ ETF', symbol: 'QQQ' },
-      { name: 'iShares Dow Jones ETF', symbol: 'IYY' },
-      { name: 'iShares Bitcoin Trust', symbol: 'IBIT' },
-      { name: 'Fidelity Wise Origin Bitcoin Trust', symbol: 'FBTC' },
-      { name: 'Grayscale Bitcoin Trust', symbol: 'GBTC' },
-    ],
-    []
-  );
-
-  // Find indices name from indicesList
   const indicesInfo = indicesList.find(
     (indices) => indices.symbol === indicesSymbol
   );
   const indicesName = indicesInfo ? indicesInfo.name : 'Unknown Index';
 
-  return (
-    <>
-      <main>
-        <div className='flex w-full text-xs '>
-          <Navbar />
-          <div className='flex justify-between w-full'>
-            <div className='flex flex-col w-full h-screen  overflow-y-scroll'>
-              <Header />
-              <div className='flex w-full h-screen'>
-                <IndicesList indicesList={indicesList} />
-                <div className='w-full p-4'>
-                  <TradingViewSection
-                    stocksList={indicesList}
-                    initialStockTicker={indicesSymbol}
-                    initialTitle={`${indicesName} / BTC`}
-                    TopTitle='Indices: '
-                    selectedTimespan='day'
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </>
-  );
+  return {
+    title: `${indicesName} vs Bitcoin | ${indicesSymbol} vs BTC Price Comparison — BasedinBitcoin`,
+    description: `Compare ${indicesName} (${indicesSymbol}) price with Bitcoin (BTC). View real-time price charts, historical data, and market analysis for ${indicesSymbol} vs BTC.`,
+    keywords: `${indicesSymbol}, Bitcoin, BTC, ETF, index fund, cryptocurrency, market analysis, price comparison, trading chart`,
+    openGraph: {
+      title: `${indicesName} vs Bitcoin | ${indicesSymbol} vs BTC Price Comparison — BasedinBitcoin`,
+      description: `Compare ${indicesName} (${indicesSymbol}) price with Bitcoin (BTC). View real-time price charts and market analysis.`,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${indicesName} vs Bitcoin | ${indicesSymbol} vs BTC Price Comparison — BasedinBitcoin`,
+      description: `Compare ${indicesName} (${indicesSymbol}) price with Bitcoin (BTC). View real-time price charts and market analysis.`,
+    },
+  };
+}
+
+export default function IndicesPage({ params }: IndicesPageProps) {
+  return <IndicesPageClient indices={params.indices} />;
 }

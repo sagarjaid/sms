@@ -20,7 +20,13 @@ export const viewport: Viewport = {
 
 // This adds default SEO tags to all pages in our app.
 // You can override them in each page passing params to getSOTags() function.
-export const metadata = getSEOTags();
+export const metadata = getSEOTags({
+  title:
+    'BasedinBitcoin - Track asset prices in real-time against Bitcoin (BTC)',
+  description:
+    "Compare any asset values directly against Bitcoin's current market price.",
+  canonicalUrlRelative: '/',
+});
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
