@@ -23,7 +23,7 @@ const RealEstateList = ({ realEstateList }: RealEstateListProps) => {
   };
 
   return (
-    <div className='w-52 max-h-[calc(100vh-80px)] border-r overflow-hidden'>
+    <div className='hidden md:block w-52 max-h-[calc(100vh-80px)] border-r overflow-hidden'>
       {realEstateList.map((realEstate) => (
         <Link
           href={`/real-estate/${realEstate.symbol.toLowerCase()}-vs-btc`}

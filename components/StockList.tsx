@@ -21,7 +21,7 @@ const StockList = ({ stocksList }: StockListProps) => {
   };
 
   return (
-    <div className='w-52 max-h-[calc(100vh-80px)] border-r overflow-hidden hover:overflow-y-scroll'>
+    <div className='hidden md:block w-52 max-h-[calc(100vh-80px)] border-r overflow-hidden hover:overflow-y-scroll'>
       {stocksList.map((stock) => (
         <Link
           href={`/stock/${stock.symbol.toLowerCase()}-vs-btc`}

@@ -23,7 +23,7 @@ const BondList = ({ bondsList }: BondListProps) => {
   };
 
   return (
-    <div className='w-52 max-h-[calc(100vh-80px)] border-r overflow-hidden'>
+    <div className='hidden md:block w-52 max-h-[calc(100vh-80px)] border-r overflow-hidden'>
       {bondsList.map((bond) => (
         <Link
           href={`/bond/${bond.symbol.toLowerCase()}-vs-btc`}

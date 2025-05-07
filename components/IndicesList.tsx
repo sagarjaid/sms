@@ -21,7 +21,7 @@ const IndicesList = ({ indicesList }: IndicesListProps) => {
   };
 
   return (
-    <div className='w-52 max-h-[calc(100vh-80px)] border-r overflow-hidden'>
+    <div className='hidden md:block w-52 max-h-[calc(100vh-80px)] border-r overflow-hidden'>
       {indicesList.map((index) => (
         <Link
           href={`/indices/${index.symbol.toLowerCase()}-vs-btc`}

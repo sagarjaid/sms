@@ -23,7 +23,7 @@ const CommodityList = ({ commoditiesList }: CommodityListProps) => {
   };
 
   return (
-    <div className='w-52 max-h-[calc(100vh-80px)] border-r overflow-hidden'>
+    <div className='hidden md:block w-52 max-h-[calc(100vh-80px)] border-r overflow-hidden'>
       {commoditiesList.map((commodity) => (
         <Link
           href={`/commodity/${commodity.symbol.toLowerCase()}-vs-btc`}
