@@ -10,6 +10,8 @@ import config from '@/config';
 import { Button } from '@/components/ui/button-2';
 import { AssetSearch } from './asset-search';
 import Logo from './Logo';
+import ButtonAccount from './ButtonAccount';
+import ButtonLogin from './ButtonLogin';
 
 const Header = () => {
   const searchParams = useSearchParams();
@@ -38,7 +40,7 @@ const Header = () => {
   return (
     <header className='border-b border-border sticky top-0 w-full z-40 bg-background'>
       <nav
-        className='w-full flex items-center justify-between p-4'
+        className='w-full max-w-7xl mx-auto flex items-center justify-between p-4'
         aria-label='Global'>
         <div className={`flex ${shouldShowSearch ? 'lg:hidden' : 'lg:block'}`}>
           <Logo priority={true} />
@@ -70,7 +72,7 @@ const Header = () => {
         </div>
 
         <div className='hidden items-center lg:flex lg:flex-1 lg:justify-end lg:gap-x-4'>
-          {/* <div className='hidden lg:flex lg:gap-x-8'>
+          <div className='hidden lg:flex lg:gap-x-6'>
             <Link
               href='/'
               className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
@@ -86,7 +88,7 @@ const Header = () => {
               className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
               Blog
             </Link>
-          </div> */}
+          </div>
 
           <Button
             variant='ghost'
@@ -126,63 +128,7 @@ const Header = () => {
               </svg>
             )}
           </Button>
-
-          <Link
-            href='/all'
-            className='border border-border rounded-sm  gap-1.5 hover:bg-muted/80 text-muted-foreground font-bold py-1 px-2  flex items-center h-10 transition-colors'>
-            {/* <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='w-5 h-5'
-              viewBox='0 0 48 48'>
-              <path
-                fill='#FFC107'
-                d='M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z'
-              />
-              <path
-                fill='#FF3D00'
-                d='m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z'
-              />
-              <path
-                fill='#4CAF50'
-                d='M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z'
-              />
-              <path
-                fill='#1976D2'
-                d='M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z'
-              />
-            </svg> */}
-
-            <span className='text-xs'>All Asset Links</span>
-
-            <svg
-              fill='none'
-              className='w-4 h-4'
-              strokeWidth={2}
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-              xmlns='http://www.w3.org/2000/svg'
-              aria-hidden='true'>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125'
-              />
-            </svg>
-            {/* <svg
-              fill='none'
-              className='w-3 h-3'
-              strokeWidth={3}
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-              xmlns='http://www.w3.org/2000/svg'
-              aria-hidden='true'>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='m8.25 4.5 7.5 7.5-7.5 7.5'
-              />
-            </svg> */}
-          </Link>
+          <ButtonLogin />
         </div>
       </nav>
 
@@ -226,11 +172,11 @@ const Header = () => {
                   className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
                   All Asset Links
                 </Link>
-                {/* <Link
+                <Link
                   href='/blog'
                   className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
                   Blog
-                </Link> */}
+                </Link>
               </div>
             </div>
             <div className='-ml-1 pb-4'>
@@ -274,15 +220,7 @@ const Header = () => {
                   )}
                 </Button>
 
-                {/* <Button
-                  asChild
-                  variant='default'>
-                  <Link
-                    href='/signin'
-                    className='text-sm font-semibold leading-6'>
-                    Log in <span aria-hidden='true'>&rarr;</span>
-                  </Link>
-                </Button> */}
+                <ButtonLogin />
               </div>
             </div>
           </div>

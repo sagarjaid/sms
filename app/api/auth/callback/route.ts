@@ -10,6 +10,7 @@ export const dynamic = 'force-dynamic';
 export async function GET(req: NextRequest) {
   const requestUrl = new URL(req.url);
   const code = requestUrl.searchParams.get('code');
+  const redirectTo = requestUrl.searchParams.get('redirect_to');
 
   if (code) {
     const supabase = createClient();
@@ -17,5 +18,9 @@ export async function GET(req: NextRequest) {
   }
 
   // URL to redirect to after sign in process completes
-  return NextResponse.redirect(requestUrl.origin + config.auth.callbackUrl);
+  const redirectUrl = redirectTo
+    ? requestUrl.origin + redirectTo
+    : requestUrl.origin + config.auth.callbackUrl;
+
+  return NextResponse.redirect(redirectUrl);
 }

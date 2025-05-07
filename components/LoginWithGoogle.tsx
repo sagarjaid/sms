@@ -12,7 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 // This a login/singup page for Supabase Auth.
 // Successfull login redirects to /api/auth/callback where the Code Exchange is processed (see app/api/auth/callback/route.js).
-export default function Login() {
+export default function LoginWithGoogle() {
   const supabase = createClient();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -26,6 +26,9 @@ export default function Login() {
         provider: 'google',
         options: {
           redirectTo: redirectURL,
+          queryParams: {
+            redirect_to: window.location.pathname,
+          },
         },
       });
     } catch (error) {
@@ -38,6 +41,7 @@ export default function Login() {
   return (
     <Button
       className='w-fit'
+      variant='outline'
       onClick={handleSignup}
       disabled={isLoading}>
       {isLoading ? (
@@ -65,7 +69,7 @@ export default function Login() {
           />
         </svg>
       )}
-      Sign-in with Google
+      Login with Google
     </Button>
   );
 }
