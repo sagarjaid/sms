@@ -156,13 +156,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <BlogTOC
                 toc={toc}
                 className='hidden md:block'
+                fixed={true}
               />
             </aside>
 
             {/* Main Content */}
             <article className='flex-1 order-1 lg:order-2'>
               {post.coverImage && (
-                <div className='w-full mb-8 rounded-lg overflow-hidden'>
+                <div className='w-full mb-8 border border-border rounded-lg overflow-hidden'>
                   <Image
                     src={post.coverImage}
                     alt={post.title}
@@ -178,6 +179,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <BlogTOC
                 toc={toc}
                 className='block md:hidden border border-border rounded-lg p-4'
+                fixed={false}
               />
 
               {/* Main Notion Content */}
@@ -211,11 +213,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
               </div>
               {/* CTA Section */}
-              <div className=' bg-green-100 border border-green-600 rounded-lg p-6 h-64 flex flex-col justify-center items-center text-center mt-8'>
-                <h3 className='text-2xl font-bold mb-2 max-w-xl mx-auto text-center'>
+              <div className='  border border-green-600 rounded-lg p-6 h-64 flex flex-col justify-center items-center text-center mt-8'>
+                <h3 className='text-2xl font-bold mb-2 max-w-xl mx-auto text-muted-foreground text-center'>
                   What&apos;s the price of BTC against Stock?
                 </h3>
-                <p className='mb-4 max-w-xl mx-auto text-center'>
+                <p className='mb-4 max-w-xl mx-auto text-muted-foreground text-center'>
                   Compare Asset Prices with Bitcoin&apos;s Value Today, Compare
                   any asset values directly against Bitcoin&apos;s current
                   market price.

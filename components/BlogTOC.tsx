@@ -12,11 +12,12 @@ interface TocItem {
 interface BlogTOCProps {
   toc: TocItem[];
   className?: string;
+  fixed?: boolean;
 }
 
-export default function BlogTOC({ toc, className }: BlogTOCProps) {
+export default function BlogTOC({ toc, className, fixed }: BlogTOCProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(fixed ? true : false);
 
   useEffect(() => {
     if (!open) return;
@@ -39,9 +40,9 @@ export default function BlogTOC({ toc, className }: BlogTOCProps) {
 
   return (
     <div
-      className={`p-2 max-h-96 overflow-y-auto sticky top-24 ${
-        className || ''
-      }`}>
+      className={`p-2 max-h-96 overflow-y-auto  top-24 ${
+        fixed ? 'sticky' : ''
+      } ${className || ''}`}>
       <div
         className={`flex items-center justify-between  ${
           open ? 'border-b border-border pb-2 mb-4' : ''

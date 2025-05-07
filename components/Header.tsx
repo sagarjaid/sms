@@ -159,8 +159,8 @@ const Header = () => {
             </Button>
           </div>
 
-          <div className='flow-root mt-6'>
-            <div className='py-4'>
+          <div className='flow-root mt-4'>
+            <div className='pb-4'>
               <div className='flex flex-col gap-y-4 items-start'>
                 <Link
                   href='/'
