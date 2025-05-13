@@ -4,12 +4,12 @@ import { ConfigProps } from './types/config';
 
 const config: ConfigProps = {
   // REQUIRED
-  appName: 'BasedinBitcoin',
+  appName: 'Smslly',
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
     'Compare any asset values directly against Bitcoin current market price.',
   // REQUIRED (no https://, not trailing slash at the end, just the naked domain)
-  domainName: 'basedinbitcoin.com',
+  domainName: 'smslly.com',
   crisp: {
     // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (resend.supportEmail) otherwise customer support won't work.
     id: '',
@@ -74,11 +74,11 @@ const config: ConfigProps = {
   },
   resend: {
     // REQUIRED — Email 'From' field to be used when sending magic login links
-    fromNoReply: `basedinbitcoin <noreply@resend.basedinbitcoin.com>`,
+    fromNoReply: `smslly <noreply@resend.smslly.com>`,
     // REQUIRED — Email 'From' field to be used when sending other emails, like abandoned carts, updates etc..
-    fromAdmin: `Kris at basedinbitcoin <basedinbitcoin@gmail.com>`,
+    fromAdmin: `Kris at smslly <smslly@gmail.com>`,
     // Email shown to customer if need support. Leave empty if not needed => if empty, set up Crisp above, otherwise you won't be able to offer customer support."
-    supportEmail: 'basedinbitcoin@gmail.com',
+    supportEmail: 'smslly@gmail.com',
   },
   colors: {
     // The primary color of your app

@@ -7,7 +7,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Blog | BasedinBitcoin',
+  title: 'Blog | Smslly',
   description: 'Latest insights and analysis about Bitcoin and other assets',
 };
 

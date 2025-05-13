@@ -24,12 +24,12 @@ export async function generateMetadata({
 
   if (!post) {
     return {
-      title: 'Post Not Found | BasedinBitcoin',
+      title: 'Post Not Found | Smslly',
     };
   }
 
   return {
-    title: `${post.title} | BasedinBitcoin Blog`,
+    title: `${post.title} | Smslly Blog`,
     description: post.slug,
     openGraph: {
       title: post.title,
@@ -200,7 +200,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {/* Share Buttons */}
               <ShareButtons
                 title={post.title}
-                url={`https://basedinbitcoin.com/blog/${post.slug}`}
+                url={`https://smslly.com/blog/${post.slug}`}
               />
               {/* Written By Section */}
               <div className='flex items-center gap-4 mt-12 mb-8'>
