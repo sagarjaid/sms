@@ -61,3 +61,38 @@ export default function MessagesPage({
 
   return <MessagesClient params={params} />;
 }
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { country: string; phoneNumber: string };
+}) {
+  const countryData = getCountryData(params.country);
+  if (!countryData) {
+    return {
+      title: 'Phone Number Not Found | SMSlly',
+      description: 'The requested phone number could not be found.',
+    };
+  }
+
+  return {
+    title: `${countryData.name} temporary phone number | ${params.phoneNumber} | Receive SMS online — SMSlly`,
+    description: `Receive SMS online with ${params.phoneNumber} - a temporary phone number in ${countryData.name}. Use this number for SMS verification, privacy, and security. Free SMS receiving service.`,
+    keywords: [
+      `${params.phoneNumber}`,
+      `${countryData.name} Receive SMS online`,
+      `${countryData.name} temporary number`,
+      `${countryData.name} SMS verification`,
+      `receive SMS ${params.phoneNumber}`,
+      `${countryData.name} online number`,
+      `${countryData.name} virtual number`,
+      `${countryData.name} disposable number`,
+      `free SMS verification ${countryData.name}`,
+      `${countryData.name} SMS receiving service`,
+    ],
+    openGraph: {
+      title: `${params.phoneNumber} | ${countryData.name} Receive SMS online — SMSlly`,
+      description: `Receive SMS online with ${params.phoneNumber} - a temporary phone number in ${countryData.name}. Use this number for SMS verification, privacy, and security. Free SMS receiving service.`,
+    },
+  };
+}

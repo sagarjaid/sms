@@ -4,10 +4,10 @@ import { ConfigProps } from './types/config';
 
 const config: ConfigProps = {
   // REQUIRED
-  appName: 'Smslly',
+  appName: 'SMSlly - Receive SMS Online | Temporary Phone Number',
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
-    'Compare any asset values directly against Bitcoin current market price.',
+    'Get a temporary phone number to receive SMS online and receive OTP online. No signup required. No credit card required.',
   // REQUIRED (no https://, not trailing slash at the end, just the naked domain)
   domainName: 'smslly.com',
   crisp: {
@@ -74,11 +74,11 @@ const config: ConfigProps = {
   },
   resend: {
     // REQUIRED — Email 'From' field to be used when sending magic login links
-    fromNoReply: `smslly <noreply@resend.smslly.com>`,
+    fromNoReply: `Sagar Jaid <noreply@smslly.com>`,
     // REQUIRED — Email 'From' field to be used when sending other emails, like abandoned carts, updates etc..
-    fromAdmin: `Kris at smslly <smslly@gmail.com>`,
+    fromAdmin: `Sagar Jaid <sagarjaid321@gmail.com>`,
     // Email shown to customer if need support. Leave empty if not needed => if empty, set up Crisp above, otherwise you won't be able to offer customer support."
-    supportEmail: 'smslly@gmail.com',
+    supportEmail: 'sagarjaid321@gmail.com',
   },
   colors: {
     // The primary color of your app

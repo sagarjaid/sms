@@ -7,8 +7,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Blog | Smslly',
-  description: 'Latest insights and analysis about Bitcoin and other assets',
+  title: 'Blog | SMSlly',
+  description: 'Temporary phone number blog',
 };
 
 export const dynamic = 'force-dynamic';

@@ -7,7 +7,7 @@ export interface Keyword {
 }
 
 // Keywords configuration
-export const KEYWORDS = [
+export const KEYWORDS: Keyword[] = [
   {
     slug: 'temporary-phone-number',
     title: 'Temporary Phone Number',

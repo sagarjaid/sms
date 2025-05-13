@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { BreadcrumbNav } from '@/components/breadcrumb-nav';
 import { SERVICES } from '@/lib/service';
 import PhoneNumberGrid from '@/components/phone-number-grid';
+import ServicesSection from '@/components/services-section';
+import KeywordsSection from '@/components/keywords-section';
 
 // Explicitly mark page as static
 export const dynamic = 'force-static';
@@ -26,14 +28,30 @@ export async function generateMetadata({
   const countryData = getCountryData(params.country);
   if (!countryData) {
     return {
-      title: 'Country Not Found',
+      title: 'Country Not Found | SMSlly',
       description: 'The requested country could not be found.',
     };
   }
 
   return {
-    title: `${countryData.name}`,
-    description: `Find ${countryData.name}. Browse through various job types and opportunities.`,
+    title: `${countryData.name} SMS Numbers | Receive SMS Online — SMSlly`,
+    description: `Get temporary phone numbers and SMS receiving services in ${countryData.name}. Receive SMS online for verification, privacy, and security. Instant access to ${countryData.name} phone numbers.`,
+    keywords: [
+      `${countryData.name} SMS`,
+      `${countryData.name} phone numbers`,
+      `${countryData.name} temporary number`,
+      `${countryData.name} SMS verification`,
+      `receive SMS in ${countryData.name}`,
+      `${countryData.name} online number`,
+      `${countryData.name} virtual number`,
+      `${countryData.name} disposable number`,
+      `free SMS verification ${countryData.name}`,
+      `${countryData.name} SMS receiving service`,
+    ],
+    openGraph: {
+      title: `${countryData.name} SMS Numbers | Receive SMS Online — SMSlly`,
+      description: `Get temporary phone numbers and SMS receiving services in ${countryData.name}. Receive SMS online for verification, privacy, and security. Instant access to ${countryData.name} phone numbers.`,
+    },
   };
 }
 
@@ -68,7 +86,7 @@ export default function CountryPage({
 
   const breadcrumbItems = [
     { label: 'Home', href: getAbsoluteUrl('/') },
-    { label: 'Country' },
+    { label: 'Countries', href: getAbsoluteUrl('/country') },
     { label: countryData.name },
   ];
 
@@ -77,26 +95,15 @@ export default function CountryPage({
       <div className='mb-6'>
         <BreadcrumbNav items={breadcrumbItems} />
       </div>
-      <h1 className='text-3xl font-bold mb-6'>Browse Jobs by Location</h1>
-      <div className='mb-8'>
+      <h1 className='text-3xl font-bold mb-6'>
+        {countryData.name} SMS Services
+      </h1>
+      <div className='space-y-8'>
         <PhoneNumberGrid />
-        <h2 className='text-xl font-semibold mb-4'>Available Services</h2>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {SERVICES.map((service) => (
-            <Link
-              href={getAbsoluteUrl(
-                `/receive-sms-online/${service
-                  .toLowerCase()
-                  .replace(/\s+/g, '-')}/${countryData.name
-                  .toLowerCase()
-                  .replace(/\s+/g, '-')}`
-              )}
-              key={service}
-              className='text-blue-600 underline'>
-              {service}
-            </Link>
-          ))}
-        </div>
+
+        <ServicesSection showAll={false} />
+
+        <KeywordsSection />
       </div>
     </div>
   );

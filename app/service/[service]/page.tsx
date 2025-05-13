@@ -6,6 +6,8 @@ import { getAbsoluteUrl } from '@/lib/utils';
 import Link from 'next/link';
 import { BreadcrumbNav } from '@/components/breadcrumb-nav';
 import { SERVICES } from '@/lib/service';
+import CountriesSection from '@/components/countries-section';
+import KeywordsSection from '@/components/keywords-section';
 
 // Explicitly mark page as static
 export const dynamic = 'force-static';
@@ -71,23 +73,12 @@ export default function ServicePage({
       <div className='mb-6'>
         <BreadcrumbNav items={breadcrumbItems} />
       </div>
-      <h1 className='text-3xl font-bold mb-6'>Browse {serviceData}</h1>
-      <div className='mb-8'>
-        <h2 className='text-xl font-semibold mb-4'>Available Locations</h2>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {countries.map((country) => (
-            <Link
-              href={getAbsoluteUrl(
-                `/receive-sms-online/${serviceData
-                  .toLowerCase()
-                  .replace(/\s+/g, '-')}/${country.code}`
-              )}
-              key={country.code}
-              className='text-blue-600 underline'>
-              {country.name}
-            </Link>
-          ))}
-        </div>
+      <h1 className='text-3xl font-bold mb-6'>
+        Receive SMS Online for {serviceData}
+      </h1>
+      <div className='space-y-8'>
+        <CountriesSection />
+        <KeywordsSection />
       </div>
     </div>
   );

@@ -30,7 +30,14 @@ import config from '@/config';
 export const metadata = getSEOTags({
   title: `Terms and Conditions | ${config.appName}`,
   description:
-    'Read the terms and conditions for using Smslly to track and compare asset prices against Bitcoin.',
+    "Read our terms and conditions to understand the rules and guidelines for using SMSlly's temporary phone number and SMS receiving service.",
+  keywords: [
+    'SMSlly terms',
+    'SMS service terms',
+    'temporary phone number terms',
+    'SMS receiving terms',
+    'service conditions',
+  ],
   canonicalUrlRelative: '/tos',
 });
 

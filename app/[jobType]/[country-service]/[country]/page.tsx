@@ -8,6 +8,10 @@ import { KEYWORDS } from '@/lib/keyword';
 import { SERVICES } from '@/lib/service';
 import { BreadcrumbNav } from '@/components/breadcrumb-nav';
 import { getAbsoluteUrl } from '@/lib/utils';
+import PhoneNumberGrid from '@/components/phone-number-grid';
+import KeywordsSection from '@/components/keywords-section';
+import CountriesSection from '@/components/countries-section';
+import ServicesSection from '@/components/services-section';
 
 // Explicitly mark page as static
 // export const dynamic = 'force-static';
@@ -51,20 +55,42 @@ export async function generateMetadata({
 
   if (!jobType || !service || !country) {
     return getSEOTags({
-      title: 'Page Not Found',
+      title: 'Page Not Found — SMSlly',
       description: 'The requested page could not be found.',
     });
   }
 
-  const title = `${jobType.title} for ${service} in ${country.name}`;
-  const description = `Looking for ${jobType.title.toLowerCase()} for ${service} in ${country.name}? Join today and earn with flexible hours, great pay, and complete privacy.`;
+  const title = `${jobType.title} SMS for ${service} in ${country.name}`;
+  const description = `${jobType.title.toLowerCase()} SMS verification with ${service} in ${
+    country.name
+  }. Free and secure SMS receiving service for ${jobType.title.toLowerCase()} messages and codes. Instant access to online numbers for receiving text messages for ${service} in ${
+    country.name
+  }.`;
+
+  const keywords = [
+    `${jobType.title} SMS ${service} ${country.name}`,
+    `${jobType.title} verification ${service} ${country.name}`,
+    `${jobType.title} phone number ${service} ${country.name}`,
+    `${service} SMS service ${country.name}`,
+    `${country.name} phone number ${service}`,
+    `${country.name} SMS verification ${service}`,
+    'temporary phone number',
+    'SMS verification',
+    'receive SMS online',
+    'online phone number',
+    'virtual phone number',
+    'disposable phone number',
+    'free SMS verification',
+    'SMS receiving service',
+  ];
 
   return getSEOTags({
-    title: `${title} | High-Paying Opportunities — Smslly`,
+    title: `${title} | Receive SMS Online — SMSlly`,
     description,
+    keywords,
     canonicalUrlRelative: `/${jobType.slug}/${params['country-service']}/${params.country}`,
     openGraph: {
-      title: `${title} | High-Paying Opportunities — Smslly`,
+      title: `${title} | Receive SMS Online — SMSlly`,
       description,
     },
   });
@@ -114,12 +140,11 @@ export default function ServiceCountryPage({
         {jobType.title} for {service} in {country.name}
       </h1>
 
-      <div className='flex justify-center'>
-        <Link
-          href='#join'
-          className='border border-gray-700 rounded-sm w-fit text-center gap-1.5 hover:bg-muted/80 text-muted-foreground font-bold py-4 px-6 mb-12 flex items-center h-12 transition-colors'>
-          <span>Apply Now</span>
-        </Link>
+      <div className='space-y-8'>
+        <PhoneNumberGrid />
+        <CountriesSection />
+        <ServicesSection showAll={false} />
+        <KeywordsSection />
       </div>
     </div>
   );

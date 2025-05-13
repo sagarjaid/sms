@@ -19,7 +19,7 @@ module.exports = {
   // Add additional configuration for better static URL handling
   changefreq: 'weekly',
   priority: 0.7,
-  sitemapSize: 2000,
+  sitemapSize: 1000,
   autoLastmod: true,
   // Generate sitemap for all static pages
   generateIndexSitemap: true,

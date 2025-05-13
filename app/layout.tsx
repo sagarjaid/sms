@@ -22,12 +22,22 @@ export const viewport: Viewport = {
 // This adds default SEO tags to all pages in our app.
 // You can override them in each page passing params to getSOTags() function.
 export const metadata = getSEOTags({
-  title: 'Smslly - Track asset prices in real-time against Bitcoin (BTC)',
+  title: 'SMSlly - Receive SMS Online | Temporary Phone Number',
   description:
-    "Compare any asset values directly against Bitcoin's current market price.",
+    'Get a temporary phone number to receive SMS online. Free and secure SMS receiving service for verification codes, messages, and more.',
+  keywords: [
+    'temporary phone number',
+    'receive SMS online',
+    'SMS verification',
+    'virtual phone number',
+    'disposable phone number',
+    'SMS receiving service',
+    'online SMS',
+    'free SMS receiver',
+  ],
   canonicalUrlRelative: '/',
   extraTags: {
-    'google-site-verification': 'bpVto528QOEsbHsk4o2dP8yL3DMcQb6kFWjoQUgSoq0',
+    'google-site-verification': 'gggggg',
   },
 });
 

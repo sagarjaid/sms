@@ -79,15 +79,15 @@ const Header = () => {
               Home
             </Link>
             <Link
-              href='/all'
+              href='/country'
               className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
-              All Asset Links
+              All Numbers
             </Link>
-            <Link
+            {/* <Link
               href='/blog'
               className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
               Blog
-            </Link>
+            </Link> */}
           </div>
 
           <Button
@@ -168,15 +168,15 @@ const Header = () => {
                   Home
                 </Link>
                 <Link
-                  href='/all'
+                  href='/country'
                   className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
-                  All Asset Links
+                  All Numbers
                 </Link>
-                <Link
+                {/* <Link
                   href='/blog'
                   className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
                   Blog
-                </Link>
+                </Link> */}
               </div>
             </div>
             <div className='-ml-1 pb-4'>

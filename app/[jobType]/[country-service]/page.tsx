@@ -4,10 +4,14 @@ import { Country } from 'country-state-city';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getSEOTags } from '@/lib/seo';
-import { KEYWORDS } from '@/lib/keyword';
-import { SERVICES } from '@/lib/service';
+import { KEYWORDS, Keyword } from '@/lib/keyword';
+import { SERVICES, Service } from '@/lib/service';
 import { BreadcrumbNav } from '@/components/breadcrumb-nav';
 import { getAbsoluteUrl } from '@/lib/utils';
+import CountriesSection from '@/components/countries-section';
+import PhoneNumberGrid from '@/components/phone-number-grid';
+import ServicesSection from '@/components/services-section';
+import KeywordsSection from '@/components/keywords-section';
 
 // Explicitly mark page as static
 
@@ -44,7 +48,9 @@ export async function generateMetadata({
 }: {
   params: { jobType: string; 'country-service': string };
 }) {
-  const jobType = KEYWORDS.find((type) => type.slug === params.jobType);
+  const jobType = KEYWORDS.find(
+    (type: Keyword) => type.slug === params.jobType
+  );
   const normalizedName = params['country-service']
     .toLowerCase()
     .replace(/-/g, ' ');
@@ -55,32 +61,70 @@ export async function generateMetadata({
   );
 
   // If not found as country, try as service
-  let service =
-    !country ? SERVICES.find((s) => s.toLowerCase() === normalizedName) : null;
+  let service = !country
+    ? SERVICES.find((s: Service) => s.toLowerCase() === normalizedName)
+    : null;
 
   if (!jobType || (!country && !service)) {
     return getSEOTags({
-      title: 'Page Not Found',
+      title: 'Page Not Found — SMSlly',
       description: 'The requested page could not be found.',
     });
   }
 
-  const title =
-    country ?
-      `${jobType.title} in ${country.name}`
-    : `${jobType.title} for ${service}`;
+  const title = country
+    ? `${jobType.title} SMS in ${country.name}`
+    : `${jobType.title} SMS for ${service}`;
 
-  const description =
-    country ?
-      `Looking for ${jobType.title.toLowerCase()} in ${country.name}? Join today and earn with flexible hours, great pay, and complete privacy.`
-    : `Looking for ${jobType.title.toLowerCase()} for ${service}? Join today and earn with flexible hours, great pay, and complete privacy.`;
+  const description = country
+    ? `${jobType.title.toLowerCase()} SMS verification in ${
+        country.name
+      }. Free and secure SMS receiving service for ${jobType.title.toLowerCase()} messages and codes. Instant access to online numbers for receiving text messages in ${
+        country.name
+      }.`
+    : `${jobType.title.toLowerCase()} SMS verification with ${service}. Free and secure SMS receiving service for ${jobType.title.toLowerCase()} messages and codes. Instant access to online numbers for receiving text messages for ${service}.`;
+
+  const keywords = country
+    ? [
+        `${jobType.title} SMS ${country.name}`,
+        `${jobType.title} verification ${country.name}`,
+        `${jobType.title} phone number ${country.name}`,
+        `${country.name} SMS service`,
+        'temporary phone number',
+        'SMS verification',
+        'receive SMS online',
+        'online phone number',
+        'virtual phone number',
+        'disposable phone number',
+        'free SMS verification',
+        'SMS receiving service',
+        `${country.name} phone number`,
+        `${country.name} SMS verification`,
+      ]
+    : [
+        `${jobType.title} SMS ${service}`,
+        `${jobType.title} verification ${service}`,
+        `${jobType.title} phone number ${service}`,
+        `${service} SMS service`,
+        'temporary phone number',
+        'SMS verification',
+        'receive SMS online',
+        'online phone number',
+        'virtual phone number',
+        'disposable phone number',
+        'free SMS verification',
+        'SMS receiving service',
+        `${service} phone number`,
+        `${service} SMS verification`,
+      ];
 
   return getSEOTags({
-    title: `${title} | High-Paying Opportunities — Smslly`,
+    title: `${title} | Receive SMS Online — SMSlly`,
     description,
+    keywords,
     canonicalUrlRelative: `/${jobType.slug}/${params['country-service']}`,
     openGraph: {
-      title: `${title} | High-Paying Opportunities — Smslly`,
+      title: `${title} | Receive SMS Online — SMSlly`,
       description,
     },
   });
@@ -91,7 +135,9 @@ export default function CountryServicePage({
 }: {
   params: { jobType: string; 'country-service': string };
 }) {
-  const jobType = KEYWORDS.find((type) => type.slug === params.jobType);
+  const jobType = KEYWORDS.find(
+    (type: Keyword) => type.slug === params.jobType
+  );
   const normalizedName = params['country-service']
     .toLowerCase()
     .replace(/-/g, ' ');
@@ -102,8 +148,9 @@ export default function CountryServicePage({
   );
 
   // If not found as country, try as service
-  let service =
-    !country ? SERVICES.find((s) => s.toLowerCase() === normalizedName) : null;
+  let service = !country
+    ? SERVICES.find((s: Service) => s.toLowerCase() === normalizedName)
+    : null;
 
   if (!jobType || (!country && !service)) {
     return notFound();
@@ -130,12 +177,11 @@ export default function CountryServicePage({
           {jobType.title} in {country.name}
         </h1>
 
-        <div className='flex justify-center'>
-          <Link
-            href='#join'
-            className='border border-gray-700 rounded-sm w-fit text-center gap-1.5 hover:bg-muted/80 text-muted-foreground font-bold py-4 px-6 mb-12 flex items-center h-12 transition-colors'>
-            <span>Apply Now</span>
-          </Link>
+        <div className='space-y-8'>
+          <PhoneNumberGrid />
+          <CountriesSection />
+          <ServicesSection showAll={false} />
+          <KeywordsSection />
         </div>
       </div>
     );
@@ -159,27 +205,7 @@ export default function CountryServicePage({
       </h1>
 
       <div className='my-8'>
-        <h2 className='text-xl font-semibold mb-4'>Select Country</h2>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {Country.getAllCountries().map((country) => (
-            <Link
-              href={getAbsoluteUrl(
-                `/${jobType.slug}/${params['country-service']}/${country.name.toLowerCase().replace(/\s+/g, '-')}`
-              )}
-              key={country.isoCode}
-              className='text-blue-600 underline'>
-              {jobType.title} for {service} in {country.name}
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      <div className='flex justify-center'>
-        <Link
-          href='#join'
-          className='border border-gray-700 rounded-sm w-fit text-center gap-1.5 hover:bg-muted/80 text-muted-foreground font-bold py-4 px-6 mb-12 flex items-center h-12 transition-colors'>
-          <span>Apply Now</span>
-        </Link>
+        <CountriesSection />
       </div>
     </div>
   );

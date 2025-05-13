@@ -4,14 +4,23 @@ import Link from 'next/link';
 import { BreadcrumbNav } from '@/components/breadcrumb-nav';
 import { getAbsoluteUrl } from '@/lib/utils';
 import { SERVICES } from '@/lib/service';
+import ServicesSection from '@/components/services-section';
+import KeywordsSection from '@/components/keywords-section';
 
 export const dynamic = 'force-static';
 
 export async function generateMetadata() {
   return {
-    title: 'Browse Jobs by Service',
+    title: 'SMS Services | SMSlly - Receive SMS Online',
     description:
-      'Find jobs by service type. Browse through various services and opportunities.',
+      'Browse our comprehensive list of SMS services. Find the perfect temporary phone number service for your needs - verification codes, messages, and more.',
+    keywords: [
+      'SMS services',
+      'temporary phone services',
+      'SMS verification services',
+      'virtual number services',
+      'SMS receiving services',
+    ],
   };
 }
 
@@ -26,21 +35,13 @@ export default function ServicesPage() {
       <div className='mb-6'>
         <BreadcrumbNav items={breadcrumbItems} />
       </div>
-      <h1 className='text-3xl font-bold mb-6'>Browse Jobs by Service</h1>
-      <div className='mb-8'>
-        <h2 className='text-xl font-semibold mb-4'>Available Services</h2>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {SERVICES.map((service) => (
-            <Link
-              href={getAbsoluteUrl(
-                `/service/${service.toLowerCase().replace(/\s+/g, '-')}`
-              )}
-              key={service}
-              className='text-blue-600 underline'>
-              {service}
-            </Link>
-          ))}
-        </div>
+      <h1 className='text-3xl font-bold mb-6'>Receive SMS Online by Service</h1>
+      <div className='space-y-8'>
+        <ServicesSection
+          showAll={true}
+          baseUrl={'service'}
+        />
+        <KeywordsSection />
       </div>
     </div>
   );

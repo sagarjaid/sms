@@ -1,6 +1,8 @@
 /** @format */
 
-export const SERVICES = [
+export type Service = string;
+
+export const SERVICES: Service[] = [
   'Other',
   '101z',
   '115com',
