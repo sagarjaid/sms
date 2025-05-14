@@ -14,7 +14,9 @@ export async function generateStaticParams() {
 
   for (const number of PHONE_NUMBERS) {
     params.push({
-      country: number.country,
+      country: encodeURIComponent(
+        number.country.toLowerCase().replace(/\s+/g, '-')
+      ),
       phoneNumber: number.phoneNumber,
     });
   }
@@ -23,8 +25,10 @@ export async function generateStaticParams() {
 }
 
 function getCountryData(countryParam: string) {
+  // First decode the URL parameter
+  const decodedParam = decodeURIComponent(countryParam);
   // Convert kebab-case to space-separated and normalize
-  const normalizedName = countryParam.toLowerCase().replace(/-/g, ' ');
+  const normalizedName = decodedParam.toLowerCase().replace(/-/g, ' ');
 
   // Try to find by name first
   const allCountries = Country.getAllCountries();
@@ -35,7 +39,7 @@ function getCountryData(countryParam: string) {
   if (countryByName) return countryByName;
 
   // If not found by name, try by code
-  const countryCode = countryParam.toUpperCase();
+  const countryCode = decodedParam.toUpperCase();
   const country = Country.getCountryByCode(countryCode);
 
   return country || null;

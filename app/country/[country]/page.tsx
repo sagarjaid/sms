@@ -16,7 +16,9 @@ export const revalidate = false;
 
 export async function generateStaticParams() {
   return Country.getAllCountries().map((country) => ({
-    country: country.name.toLowerCase().replace(/\s+/g, '-'),
+    country: encodeURIComponent(
+      country.name.toLowerCase().replace(/\s+/g, '-')
+    ),
   }));
 }
 
@@ -56,8 +58,10 @@ export async function generateMetadata({
 }
 
 function getCountryData(countryParam: string) {
+  // First decode the URL parameter
+  const decodedParam = decodeURIComponent(countryParam);
   // Convert kebab-case to space-separated and normalize
-  const normalizedName = countryParam.toLowerCase().replace(/-/g, ' ');
+  const normalizedName = decodedParam.toLowerCase().replace(/-/g, ' ');
 
   // Try to find by name first
   const allCountries = Country.getAllCountries();
@@ -68,7 +72,7 @@ function getCountryData(countryParam: string) {
   if (countryByName) return countryByName;
 
   // If not found by name, try by code
-  const countryCode = countryParam.toUpperCase();
+  const countryCode = decodedParam.toUpperCase();
   const country = Country.getCountryByCode(countryCode);
 
   return country || null;

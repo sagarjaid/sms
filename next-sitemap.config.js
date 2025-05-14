@@ -1582,7 +1582,10 @@ module.exports = {
     for (const jobType of KEYWORDS) {
       // Add country URLs
       for (const country of Country.getAllCountries()) {
-        const countrySlug = country.name.toLowerCase().replace(/\s+/g, '-');
+        // Properly encode country name for URL
+        const countrySlug = encodeURIComponent(
+          country.name.toLowerCase().replace(/\s+/g, '-')
+        );
         result.push({
           loc: `/${jobType.slug}/${countrySlug}/`,
           changefreq: config.changefreq,
@@ -1593,7 +1596,10 @@ module.exports = {
 
       // Add service URLs
       for (const service of SERVICES) {
-        const serviceSlug = service.toLowerCase().replace(/\s+/g, '-');
+        // Properly encode service name for URL
+        const serviceSlug = encodeURIComponent(
+          service.toLowerCase().replace(/\s+/g, '-')
+        );
         result.push({
           loc: `/${jobType.slug}/${serviceSlug}/`,
           changefreq: config.changefreq,

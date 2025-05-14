@@ -22,6 +22,7 @@ export function formatCountryUrl(
   suffix: string = ''
 ): string {
   const formattedName = countryName.toLowerCase().replace(/\s+/g, '-');
-  const parts = [prefix, formattedName, suffix].filter(Boolean);
+  const encodedName = encodeURIComponent(formattedName);
+  const parts = [prefix, encodedName, suffix].filter(Boolean);
   return `/${parts.join('/')}`;
 }
