@@ -37,7 +37,7 @@ export const metadata = getSEOTags({
   ],
   canonicalUrlRelative: '/',
   extraTags: {
-    'google-site-verification': 'gggggg',
+    'google-site-verification': '895IiSDa7RFQw0Hn3OX_FYAZpFILGo1426eQ4JNjla0"',
   },
 });
 
@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <ThemeProvider
           attribute='class'
-          defaultTheme='system'
+          defaultTheme='light'
           enableSystem
           disableTransitionOnChange
           storageKey='theme'

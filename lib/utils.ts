@@ -15,3 +15,13 @@ export function getAbsoluteUrl(path: string): string {
       : `https://${config.domainName}`;
   return `${baseUrl}${path.startsWith('/') ? path : `/${path}`}`;
 }
+
+export function formatCountryUrl(
+  countryName: string,
+  prefix: string = '',
+  suffix: string = ''
+): string {
+  const formattedName = countryName.toLowerCase().replace(/\s+/g, '-');
+  const parts = [prefix, formattedName, suffix].filter(Boolean);
+  return `/${parts.join('/')}`;
+}

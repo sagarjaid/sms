@@ -3,7 +3,6 @@
 import { Suspense } from 'react';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import Link from 'next/link';
 import { getSEOTags } from '@/lib/seo';
 import ServicesSection from '@/components/services-section';
 import KeywordsSection from '@/components/keywords-section';
@@ -44,10 +43,13 @@ export default function HomePageContent() {
           registration required. No credit card required. Enjoy!
         </h2>
 
-        <PhoneNumberGrid />
-        <CountriesSection />
+        <PhoneNumberGrid country={['united-states', 'india']} />
+        <CountriesSection prefix='country' />
         <KeywordsSection />
-        <ServicesSection />
+        <ServicesSection
+          prefix='service'
+          showAll={true}
+        />
       </main>
       <Footer />
     </>

@@ -141,9 +141,17 @@ export default function ServiceCountryPage({
       </h1>
 
       <div className='space-y-8'>
-        <PhoneNumberGrid />
-        <CountriesSection />
-        <ServicesSection showAll={false} />
+        <PhoneNumberGrid
+          country={[country.name.toLowerCase().replace(/\s+/g, '-')]}
+        />
+        <CountriesSection
+          prefix={`${jobType.slug}/${params['country-service']}`}
+        />
+        <ServicesSection
+          prefix={`${jobType.slug}`}
+          suffix={`${params.country.toLowerCase().replace(/\s+/g, '-')}`}
+          showAll={false}
+        />
         <KeywordsSection />
       </div>
     </div>

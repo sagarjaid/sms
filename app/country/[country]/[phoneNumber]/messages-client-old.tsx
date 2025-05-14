@@ -27,9 +27,15 @@ export default function MessagesClient({ params }: MessagesClientProps) {
   const fetchMessages = async () => {
     try {
       setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
+      const response = await fetch(`/api/messages/${params.phoneNumber}`);
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch messages');
+      }
+
+      const data = await response.json();
+      setMessages(data.messages);
+      setError(null);
     } catch (err) {
       setError('Failed to load messages. Please try again.');
       console.error(err);
@@ -108,6 +114,7 @@ export default function MessagesClient({ params }: MessagesClientProps) {
       <PhoneNumberGrid
         country={[params.country.toLowerCase().replace(/\s+/g, '-')]}
       />
+      <CountriesSection prefix={`country`} />
       <KeywordsSection />
     </div>
   );

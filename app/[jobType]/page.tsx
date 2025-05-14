@@ -86,9 +86,12 @@ export default function JobTypePage({
       <h1 className='text-3xl font-bold mb-6'>{jobType.title}</h1>
 
       <div className='space-y-8'>
-        <PhoneNumberGrid />
-        <CountriesSection />
-        <ServicesSection showAll={false} />
+        <PhoneNumberGrid country={['united-states', 'united-kingdom']} />
+        <CountriesSection prefix={jobType.slug} />
+        <ServicesSection
+          showAll={false}
+          prefix={jobType.slug}
+        />
         <KeywordsSection />
       </div>
     </div>

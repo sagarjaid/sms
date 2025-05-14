@@ -15,33 +15,33 @@ import KeywordsSection from '@/components/keywords-section';
 
 // Explicitly mark page as static
 
-export const dynamic = 'force-static';
+// export const dynamic = 'force-static';
 
-// export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic';
 export const revalidate = false;
 
-export async function generateStaticParams() {
-  const params = [];
+// export async function generateStaticParams() {
+//   const params = [];
 
-  for (const jobType of KEYWORDS) {
-    // Generate country params
-    for (const country of Country.getAllCountries()) {
-      params.push({
-        jobType: jobType.slug,
-        'country-service': country.name.toLowerCase().replace(/\s+/g, '-'),
-      });
-    }
-    // Generate service params
-    for (const service of SERVICES) {
-      params.push({
-        jobType: jobType.slug,
-        'country-service': service.toLowerCase().replace(/\s+/g, '-'),
-      });
-    }
-  }
+//   for (const jobType of KEYWORDS) {
+//     // Generate country params
+//     for (const country of Country.getAllCountries()) {
+//       params.push({
+//         jobType: jobType.slug,
+//         'country-service': country.name.toLowerCase().replace(/\s+/g, '-'),
+//       });
+//     }
+//     // Generate service params
+//     for (const service of SERVICES) {
+//       params.push({
+//         jobType: jobType.slug,
+//         'country-service': service.toLowerCase().replace(/\s+/g, '-'),
+//       });
+//     }
+//   }
 
-  return params;
-}
+//   return params;
+// }
 
 export async function generateMetadata({
   params,
@@ -178,9 +178,15 @@ export default function CountryServicePage({
         </h1>
 
         <div className='space-y-8'>
-          <PhoneNumberGrid />
-          <CountriesSection />
-          <ServicesSection showAll={false} />
+          <PhoneNumberGrid
+            country={[country.name.toLowerCase().replace(/\s+/g, '-')]}
+          />
+          <CountriesSection prefix={jobType.slug} />
+          <ServicesSection
+            showAll={false}
+            prefix={jobType.slug}
+            suffix={country.name.toLowerCase().replace(/\s+/g, '-')}
+          />
           <KeywordsSection />
         </div>
       </div>
@@ -205,7 +211,11 @@ export default function CountryServicePage({
       </h1>
 
       <div className='my-8'>
-        <CountriesSection />
+        <CountriesSection
+          prefix={`${jobType.slug}/${service
+            .toLowerCase()
+            .replace(/\s+/g, '-')}`}
+        />
       </div>
     </div>
   );

@@ -99,9 +99,15 @@ export default function CountryPage({
         {countryData.name} SMS Services
       </h1>
       <div className='space-y-8'>
-        <PhoneNumberGrid />
+        <PhoneNumberGrid
+          country={[countryData.name.toLowerCase().replace(/\s+/g, '-')]}
+        />
 
-        <ServicesSection showAll={false} />
+        <ServicesSection
+          showAll={false}
+          prefix='receive-sms-online'
+          suffix={`${countryData.name.toLowerCase().replace(/\s+/g, '-')}`}
+        />
 
         <KeywordsSection />
       </div>

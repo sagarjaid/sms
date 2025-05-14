@@ -63,8 +63,10 @@ export default function LocationsPage() {
         <h2>
           Free Temporary Phone Numbers Available in {countries.length} Countries
         </h2>
-        <PhoneNumberGrid />
-        <CountriesSection />
+        <PhoneNumberGrid
+          country={['united-states', 'united-kingdom', 'india', 'canada']}
+        />
+        <CountriesSection prefix='country' />
         <KeywordsSection />
       </div>
     </div>

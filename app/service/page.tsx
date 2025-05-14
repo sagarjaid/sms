@@ -39,7 +39,7 @@ export default function ServicesPage() {
       <div className='space-y-8'>
         <ServicesSection
           showAll={true}
-          baseUrl={'service'}
+          prefix='service'
         />
         <KeywordsSection />
       </div>

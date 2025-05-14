@@ -3,12 +3,18 @@
 'use client';
 
 import Link from 'next/link';
-import { getAbsoluteUrl } from '@/lib/utils';
+import { getAbsoluteUrl, formatCountryUrl } from '@/lib/utils';
 import { Country } from 'country-state-city';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import * as Flags from 'country-flag-icons/react/3x2';
 
-export default function CountriesSection() {
+export default function CountriesSection({
+  prefix = 'country',
+  suffix = '',
+}: {
+  prefix?: string;
+  suffix?: string;
+}) {
   return (
     <Card>
       <CardHeader>
@@ -23,7 +29,7 @@ export default function CountriesSection() {
             return (
               <Link
                 href={getAbsoluteUrl(
-                  `/country/${country.name.toLowerCase().replace(/\s+/g, '-')}`
+                  formatCountryUrl(country.name, prefix, suffix)
                 )}
                 key={country.isoCode}
                 className='flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors'>

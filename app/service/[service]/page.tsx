@@ -77,7 +77,11 @@ export default function ServicePage({
         Receive SMS Online for {serviceData}
       </h1>
       <div className='space-y-8'>
-        <CountriesSection />
+        <CountriesSection
+          prefix={`receive-sms-online/${serviceData
+            .toLowerCase()
+            .replace(/\s+/g, '-')}`}
+        />
         <KeywordsSection />
       </div>
     </div>

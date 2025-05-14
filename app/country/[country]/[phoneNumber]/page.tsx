@@ -3,6 +3,7 @@
 import { Country } from 'country-state-city';
 import { notFound } from 'next/navigation';
 import MessagesClient from './messages-client';
+import { PHONE_NUMBERS } from '@/lib/number';
 
 // Explicitly mark page as static
 export const dynamic = 'force-static';
@@ -10,15 +11,6 @@ export const revalidate = false;
 
 export async function generateStaticParams() {
   const params = [];
-
-  // This would typically come from an API or database
-  const PHONE_NUMBERS = [
-    { phoneNumber: '13132003002', country: 'united-states' },
-    { phoneNumber: '13462042708', country: 'united-states' },
-    { phoneNumber: '13137425508', country: 'united-states' },
-    { phoneNumber: '13132102924', country: 'united-states' },
-    { phoneNumber: '14066306572', country: 'united-states' },
-  ];
 
   for (const number of PHONE_NUMBERS) {
     params.push({
