@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { getAbsoluteUrl } from '@/lib/utils';
 
 interface PhoneNumberCardProps {
   phoneNumber: string;
@@ -25,7 +26,7 @@ export default function PhoneNumberCard({
 
   return (
     <Link
-      href={`/country/${slug}/${phoneNumber}`}
+      href={getAbsoluteUrl(`/country/${slug}/${phoneNumber}`)}
       className='block hover:opacity-90 transition-opacity'>
       <Card className='overflow-hidden'>
         <CardContent className='p-6 flex flex-col items-center'>

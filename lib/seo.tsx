@@ -2,6 +2,7 @@
 
 import type { Metadata } from 'next';
 import config from '@/config';
+import { getAbsoluteUrl } from '@/lib/utils';
 
 // These are all the SEO tags you can add to your pages.
 // It prefills data with default title/description/OG, etc.. and you can cusotmize it for each page.
@@ -37,16 +38,16 @@ export const getSEOTags = ({
     openGraph: {
       title: openGraph?.title || config.appName,
       description: openGraph?.description || config.appDescription,
-      url: openGraph?.url || `https://${config.domainName}/`,
+      url: openGraph?.url || getAbsoluteUrl('/'),
       siteName: openGraph?.title || config.appName,
-      // If you add an opengraph-image.(jpg|jpeg|png|gif) image to the /app folder, you don't need the code below
-      // images: [
-      //   {
-      //     url: `https://${config.domainName}/share.png`,
-      //     width: 1200,
-      //     height: 660,
-      //   },
-      // ],
+      images: [
+        {
+          url: getAbsoluteUrl('/opengraph-image.png'),
+          width: 1920,
+          height: 1080,
+          type: 'image/png',
+        },
+      ],
       locale: 'en_US',
       type: 'website',
     },
@@ -54,8 +55,7 @@ export const getSEOTags = ({
     twitter: {
       title: openGraph?.title || config.appName,
       description: openGraph?.description || config.appDescription,
-      // If you add an twitter-image.(jpg|jpeg|png|gif) image to the /app folder, you don't need the code below
-      // images: [openGraph?.image || defaults.og.image],
+      images: [getAbsoluteUrl('/twitter-image.png')],
       card: 'summary_large_image',
       creator: '@marc_louvion',
     },

@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 import { useTheme } from 'next-themes';
 import Logo from './Logo';
+import { getAbsoluteUrl } from '@/lib/utils';
 
 const Navbar = () => {
   const pathName = usePathname();
@@ -200,17 +201,13 @@ const Navbar = () => {
                 key={i}
                 className='relative'>
                 <Link
-                  href={el.slug}
-                  className={
+                  href={getAbsoluteUrl(el.slug)}
+                  className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors ${
                     isActive(el.slug)
-                      ? `p-2 py-5 ${isCollapsed ? 'pl-2' : 'pl-4'} ${
-                          isCollapsed ? 'justify-center' : ''
-                        } bg-muted font-medium text-sm flex gap-2 transition-colors cursor-pointer`
-                      : `p-2 py-5 ${isCollapsed ? 'pl-2' : 'pl-4'} ${
-                          isCollapsed ? 'justify-center' : ''
-                        } hover:bg-muted font-medium text-sm flex gap-2 transition-colors cursor-pointer`
-                  }
-                  onMouseEnter={() => isCollapsed && setHoveredItem(el.name)}
+                      ? 'bg-muted text-foreground'
+                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  }`}
+                  onMouseEnter={() => setHoveredItem(el.name)}
                   onMouseLeave={() => setHoveredItem(null)}>
                   <div className='text-foreground'>{el.svg}</div>
                   {!isCollapsed && (

@@ -12,6 +12,7 @@ import { AssetSearch } from './asset-search';
 import Logo from './Logo';
 import ButtonAccount from './ButtonAccount';
 import ButtonLogin from './ButtonLogin';
+import { getAbsoluteUrl } from '@/lib/utils';
 
 const Header = () => {
   const searchParams = useSearchParams();
@@ -74,12 +75,12 @@ const Header = () => {
         <div className='hidden items-center lg:flex lg:flex-1 lg:justify-end lg:gap-x-4'>
           <div className='hidden lg:flex lg:gap-x-6'>
             <Link
-              href='/'
+              href={getAbsoluteUrl('/')}
               className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
               Home
             </Link>
             <Link
-              href='/country'
+              href={getAbsoluteUrl('/country')}
               className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
               All Numbers
             </Link>
@@ -163,12 +164,12 @@ const Header = () => {
             <div className='pb-4'>
               <div className='flex flex-col gap-y-4 items-start'>
                 <Link
-                  href='/'
+                  href={getAbsoluteUrl('/')}
                   className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
                   Home
                 </Link>
                 <Link
-                  href='/country'
+                  href={getAbsoluteUrl('/country')}
                   className='text-sm font-semibold leading-6 text-foreground hover:text-muted-foreground transition-colors'>
                   All Numbers
                 </Link>

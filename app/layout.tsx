@@ -9,6 +9,7 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 import config from '@/config';
 import './globals.css';
 import { ThemeProvider } from '../components/theme-provider';
+import { getAbsoluteUrl } from '@/lib/utils';
 
 const font = Bricolage_Grotesque({ subsets: ['latin'] });
 
@@ -47,6 +48,21 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang='en'
       className={font.className}
       suppressHydrationWarning>
+      <head>
+        <link
+          rel='icon'
+          href={getAbsoluteUrl('/favicon.png')}
+          type='image/png'
+          sizes='516x518'
+        />
+        {/* apple-icon.png is missing, so this will 404 until you add it to public/ */}
+        <link
+          rel='apple-touch-icon'
+          href={getAbsoluteUrl('/apple-icon.png')}
+          type='image/png'
+          sizes='516x518'
+        />
+      </head>
       <body>
         <ThemeProvider
           attribute='class'

@@ -3,13 +3,14 @@
 import config from '@/config';
 import Link from 'next/link';
 import React from 'react';
+import { getAbsoluteUrl } from '@/lib/utils';
 
 const NavbarMobile = () => {
   return (
     <div className='flex w-full flex-col justify-between  cursor-pointer'>
       <div className='flex flex-col gap-2.5'>
         <Link
-          href='/'
+          href={getAbsoluteUrl('/')}
           className='bg-white p-1.5 rounded-lg hover:bg-gray-100 flex gap-2'>
           <svg
             className='w-6 h-6'
@@ -28,7 +29,7 @@ const NavbarMobile = () => {
           <button>All Channels</button>
         </Link>
         <Link
-          href='/monetized'
+          href={getAbsoluteUrl('/monetized')}
           className='bg-white p-1.5 rounded-lg hover:bg-gray-100 flex gap-2'>
           <svg
             className='w-6 h-6'
@@ -47,7 +48,7 @@ const NavbarMobile = () => {
           <button>Monetized</button>
         </Link>
         <Link
-          href='/not-monetized'
+          href={getAbsoluteUrl('/not-monetized')}
           className='bg-white p-1.5 rounded-lg hover:bg-gray-100 flex gap-2'>
           <svg
             className='w-6 h-6'
@@ -68,7 +69,7 @@ const NavbarMobile = () => {
         </Link>
 
         <Link
-          href='/demonetized'
+          href={getAbsoluteUrl('/demonetized')}
           className='bg-white p-1.5 rounded-lg hover:bg-gray-100 flex gap-2'>
           <svg
             className='w-6 h-6'
@@ -95,13 +96,13 @@ const NavbarMobile = () => {
 
         <div className='flex flex-col justify-center items-start gap-2.5 text-xs'>
           <Link
-            href='/tos'
+            href={getAbsoluteUrl('/tos')}
             target='_blank'
             className='link link-hover'>
             Terms of services
           </Link>
           <Link
-            href='/privacy-policy'
+            href={getAbsoluteUrl('/privacy-policy')}
             target='_blank'
             className='link link-hover'>
             Privacy policy

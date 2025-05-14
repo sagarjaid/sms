@@ -7,6 +7,7 @@ import config from '@/config';
 import { useTheme } from 'next-themes';
 import Logo from './Logo';
 import { KEYWORDS } from '@/lib/keyword';
+import { getAbsoluteUrl } from '@/lib/utils';
 
 // Add the Footer to the bottom of your landing page and more.
 // The support link is connected to the config.js file. If there's no config.resend.supportEmail, the link won't be displayed.
@@ -42,7 +43,7 @@ const Footer = () => {
                 {KEYWORDS.slice(0, 6).map((keyword) => (
                   <Link
                     key={keyword.slug}
-                    href={`/${keyword.slug}`}
+                    href={getAbsoluteUrl(`/${keyword.slug}`)}
                     className='text-sm leading-6 text-foreground/80 hover:text-foreground transition-colors'>
                     {keyword.title}
                   </Link>
@@ -59,7 +60,7 @@ const Footer = () => {
                 {KEYWORDS.slice(6).map((keyword) => (
                   <Link
                     key={keyword.slug}
-                    href={`/${keyword.slug}`}
+                    href={getAbsoluteUrl(`/${keyword.slug}`)}
                     className='text-sm leading-6 text-foreground/80 hover:text-foreground transition-colors'>
                     {keyword.title}
                   </Link>
@@ -74,12 +75,12 @@ const Footer = () => {
 
               <div className='flex flex-col justify-center items-center md:items-start gap-1 mb-10'>
                 <Link
-                  href='/tos'
+                  href={getAbsoluteUrl('/tos')}
                   className='text-sm  leading-6 text-foreground/80 hover:text-foreground transition-colors'>
                   Terms of services
                 </Link>
                 <Link
-                  href='/privacy-policy'
+                  href={getAbsoluteUrl('/privacy-policy')}
                   className='text-sm leading-6 text-foreground/80 hover:text-foreground transition-colors'>
                   Privacy policy
                 </Link>
