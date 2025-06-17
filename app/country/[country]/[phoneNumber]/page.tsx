@@ -5,24 +5,25 @@ import { notFound } from 'next/navigation';
 import MessagesClient from './messages-client';
 import { PHONE_NUMBERS } from '@/lib/number';
 
-// Explicitly mark page as static
-export const dynamic = 'force-static';
-export const revalidate = false;
+// Remove static generation - render on demand
+// export const dynamic = 'force-static';
+// export const revalidate = false;
 
-export async function generateStaticParams() {
-  const params = [];
+// Comment out static params generation
+// export async function generateStaticParams() {
+//   const params = [];
 
-  for (const number of PHONE_NUMBERS) {
-    params.push({
-      country: encodeURIComponent(
-        number.country.toLowerCase().replace(/\s+/g, '-')
-      ),
-      phoneNumber: number.phoneNumber,
-    });
-  }
+//   for (const number of PHONE_NUMBERS) {
+//     params.push({
+//       country: encodeURIComponent(
+//         number.country.toLowerCase().replace(/\s+/g, '-')
+//       ),
+//       phoneNumber: number.phoneNumber,
+//     });
+//   }
 
-  return params;
-}
+//   return params;
+// }
 
 function getCountryData(countryParam: string) {
   // First decode the URL parameter

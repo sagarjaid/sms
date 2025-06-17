@@ -10,17 +10,18 @@ import PhoneNumberGrid from '@/components/phone-number-grid';
 import ServicesSection from '@/components/services-section';
 import KeywordsSection from '@/components/keywords-section';
 
-// Explicitly mark page as static
-export const dynamic = 'force-static';
-export const revalidate = false;
+// Remove static generation - render on demand
+// export const dynamic = 'force-static';
+// export const revalidate = false;
 
-export async function generateStaticParams() {
-  return Country.getAllCountries().map((country) => ({
-    country: encodeURIComponent(
-      country.name.toLowerCase().replace(/\s+/g, '-')
-    ),
-  }));
-}
+// Comment out static params generation
+// export async function generateStaticParams() {
+//   return Country.getAllCountries().map((country) => ({
+//     country: encodeURIComponent(
+//       country.name.toLowerCase().replace(/\s+/g, '-')
+//     ),
+//   }));
+// }
 
 export async function generateMetadata({
   params,

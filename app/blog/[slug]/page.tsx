@@ -39,12 +39,13 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams() {
-  const posts = await getBlogPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+// Comment out static params generation
+// export async function generateStaticParams() {
+//   const posts = await getBlogPosts();
+//   return posts.map((post) => ({
+//     slug: post.slug,
+//   }));
+// }
 
 function renderNotionBlock(block: any) {
   switch (block.type) {

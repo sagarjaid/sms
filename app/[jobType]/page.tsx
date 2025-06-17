@@ -13,15 +13,16 @@ import KeywordsSection from '@/components/keywords-section';
 import CountriesSection from '@/components/countries-section';
 import PhoneNumberGrid from '@/components/phone-number-grid';
 
-// Explicitly mark page as static
-export const dynamic = 'force-static';
-export const revalidate = false;
+// Remove static generation - render on demand
+// export const dynamic = 'force-static';
+// export const revalidate = false;
 
-export async function generateStaticParams() {
-  return KEYWORDS.map((keyword: Keyword) => ({
-    jobType: keyword.slug,
-  }));
-}
+// Comment out static params generation
+// export async function generateStaticParams() {
+//   return KEYWORDS.map((keyword: Keyword) => ({
+//     jobType: keyword.slug,
+//   }));
+// }
 
 export async function generateMetadata({
   params,

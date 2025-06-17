@@ -7,33 +7,34 @@ import { BreadcrumbNav } from '@/components/breadcrumb-nav';
 import { getAbsoluteUrl } from '@/lib/utils';
 import ServicesSection from '@/components/services-section';
 
-// Explicitly mark page as static
-export const dynamic = 'force-static';
-export const revalidate = 3600; // Revalidate every hour
+// Remove static generation - render on demand
+// export const dynamic = 'force-static';
+// export const revalidate = 3600; // Revalidate every hour
 
-export async function generateStaticParams() {
-  try {
-    const params = [];
+// Comment out static params generation
+// export async function generateStaticParams() {
+//   try {
+//     const params = [];
 
-    // Ensure KEYWORDS is defined and not empty
-    if (!KEYWORDS?.length) {
-      console.error('KEYWORDS is empty or undefined');
-      return [];
-    }
+//     // Ensure KEYWORDS is defined and not empty
+//     if (!KEYWORDS?.length) {
+//       console.error('KEYWORDS is empty or undefined');
+//       return [];
+//     }
 
-    for (const jobType of KEYWORDS) {
-      if (!jobType?.slug) continue;
-      params.push({
-        jobType: jobType.slug,
-      });
-    }
+//     for (const jobType of KEYWORDS) {
+//       if (!jobType?.slug) continue;
+//       params.push({
+//         jobType: jobType.slug,
+//       });
+//     }
 
-    return params;
-  } catch (error) {
-    console.error('Error generating static params:', error);
-    return [];
-  }
-}
+//     return params;
+//   } catch (error) {
+//     console.error('Error generating static params:', error);
+//     return [];
+//   }
+// }
 
 export async function generateMetadata({
   params,
